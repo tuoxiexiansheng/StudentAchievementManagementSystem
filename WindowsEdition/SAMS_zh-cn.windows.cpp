@@ -8,8 +8,8 @@
 //Description Language: zh-cn
 //Code Language: C++
 
-//Lines:1300+
-//Length:40000+ 
+//Lines:1400+
+//Length:43000+ 
 
 /* 学生成绩管理系统 描述：
 该系统实现的功能
@@ -32,14 +32,17 @@
 #include <stdio.h>
 #include <string>
 #include <time.h> 
+#include <cmath>
 #include <set> 
-//10 Files included
+//11 Files included
+#define ERR 0.000001
 using namespace std;
 
 BOOL CtrlHandler(DWORD fdwCtrlType);
 long long i,j,n,ti;
 int menl,midl,mnl;//menl:max exam_name length	midl:max id length	mnl:max name length
 string o;//o:order
+unsigned long long ScoreControl,ScoreControlFI;//FI:FileInput 
 
 time_t tt = time(NULL);
 tm* t=localtime(&tt);
@@ -76,6 +79,10 @@ struct cmp_si/*si:student info*/{
 };
 set<student_info,cmp_si> stuinfo;
 set<student_info,cmp_si>::iterator siit;//student info iterator
+
+bool tooSmall(double x){
+	return x*x*x+x*x+x<ScoreControlFI;
+}
 
 int max(int a,int b){
 	if(a>b) return a;
@@ -184,6 +191,10 @@ namespace user{
 		fin>>usr; 
 		if(!fin){
 			MessageBox(NULL,"系统错误！\r\n请以管理员身份重新运行程序！","学生成绩管理系统",MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+			ofstream fout;
+			fout.open("ScoreControl.dat");
+			fout<<100*100*100<<endl;
+			fout.close();
 			exit(0);
 		}
 		if(o!=usr){
@@ -273,12 +284,20 @@ namespace record_input{
 				o[0]=='Y'||o[0]=='y'?found=false:found=true;
 				break;
 			}
-		stu.insert(z);
-		system("cls");
-		cout<<"输入完成！是否继续输入？(Y/N)"<<endl;
-		cin>>o;
-		if(o[0]=='y'||o[0]=='Y') goto ris;
-		else return 0;
+		if(z.S>ScoreControl){
+			system("cls");
+			cout<<"成绩超过最大限制！"<<endl;
+			getch();
+			return 0;
+		}
+		else{
+			stu.insert(z);
+			system("cls");
+			cout<<"输入完成！是否继续输入？(Y/N)"<<endl;
+			cin>>o;
+			if(o[0]=='y'||o[0]=='Y') goto ris;
+			else return 0;
+		}
 	}
 	int rchange(){
 		rcs:
@@ -989,7 +1008,12 @@ namespace ClassEdition{
 					if(o[0]!='1'&&o[0]!='2') goto ef;
 					break;  
 				}
-			stu.insert(z);
+			if(z.S>ScoreControl){
+				system("cls");
+				cout<<"成绩超过最大限制！"<<endl;
+				getch();
+			}
+			else stu.insert(z);
 		}
 		system("cls");
 		cout<<"班级模式数据录入结束！"<<endl;
@@ -999,6 +1023,7 @@ namespace ClassEdition{
 }
 
 int main(){
+	system("cls");
 	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
 	string clssnm,pwd;
 	int n;
@@ -1007,6 +1032,39 @@ int main(){
 	ti=t->tm_min; 
 	bool usr;
 	load(); hit(); start(4); usr=user::login(1); load(); file::input(1);
+	if(usr){
+		ifstream fin;
+		fin.open("ScoreControl.dat");
+		if(!fin){
+			cout<<"请输入最高分数限制（默认为100分，最高1000000分）："<<endl;
+			cin>>ScoreControl;
+			if(ScoreControl<1||ScoreControl>1000000)
+				MessageBox(NULL,"无效分数！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+			else{
+				ofstream fout;
+				fout.open("ScoreControl.dat");
+				if(!fout)
+					MessageBox(NULL,"无法保存设置，请检查系统是否已经获得管理员权限！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+				else{
+				fout<<ScoreControl*ScoreControl*ScoreControl+ScoreControl*ScoreControl+ScoreControl<<endl;
+				fout.close();
+					system("cls");
+					cout<<"您已设置 最高分数限制："<<ScoreControl<<"分，如果输入数据超过该限制，将会报错！"<<endl;
+					getch();
+				}
+			}
+		}
+		else{ 
+			fin>>ScoreControlFI; 
+			double l=-100,r=100;
+			while(r-l>ERR){
+				double mid=l+(r-l)/2;
+				if(tooSmall(mid)) l=mid;
+				else r=mid;
+			} 
+			ScoreControl=l;
+		}
+	}
 	while(o[0]!='E'){
 		cin.clear();
 		cin.sync(); 
@@ -1034,22 +1092,15 @@ int main(){
 		cout<<" 时间："<<t->tm_hour<<":";
 		if(t->tm_min<10) cout<<"0"<<t->tm_min<<endl;
 		else cout<<t->tm_min<<endl;
-		cout<<"1.学生信息操作";
-		if(!usr) cout<<"-需要管理员权限"<<endl; 
-		else cout<<endl;
-		cout<<"2.文件操作"; 
-		if(!usr) cout<<"-需要管理员权限"<<endl; 
-		else cout<<endl;
-		cout<<"3.查询"<<endl;
-		cout<<"4.设置"; 
-		if(!usr) cout<<"-需要管理员权限"<<endl; 
-		else cout<<endl;
-		cout<<"H.帮助"<<endl; 
+		if(usr) cout<<"1.学生信息操作"<<endl;
+		if(usr) cout<<"2.文件操作"<<endl; 
+		if(usr) cout<<"3.查询"<<endl;
+		if(!usr) cout<<"1.查询"<<endl; 
+		if(usr) cout<<"4.设置"<<endl; 
+		if(usr) cout<<"H.帮助"<<endl; 
 		cout<<"E.退出系统"<<endl; 
 		cout<<"L.锁定系统"<<endl; 
-		cout<<"R.重置数据";
-		if(!usr) cout<<"-需要管理员权限"<<endl; 
-		else cout<<endl; 
+		if(usr) cout<<"R.重置数据"<<endl;
 		cout<<"@.关于"<<endl; 
 		cout<<"请输入命令代码："; 
 		o[0]=getch();
@@ -1087,7 +1138,6 @@ int main(){
 			o[0]=0; 
 		}
 		if(o[0]=='1'&&usr){
-			;
 			o[0]=0; 
 			string clssnm="（请创建班级）",tmp; 
 			ifstream fin;
@@ -1135,7 +1185,6 @@ int main(){
 			o[0]=0; 
 		} 
 		if(o[0]=='2'&&usr){
-			;
 			o[0]=0; 
 			system("cls");
 			cout<<"学生成绩管理系统-文件操作";
@@ -1154,8 +1203,7 @@ int main(){
 			if(o[0]=='3') file::backup(); 
 			o[0]=0;
 		}
-		if(o[0]=='3'){
-			;
+		if(o[0]=='3'&&usr||o[0]=='1'&&!usr){
 			o[0]=0; 
 			string clssnm="（请创建班级）",tmp; 
 			ifstream fin;
@@ -1199,9 +1247,10 @@ int main(){
 			else cout<<t->tm_min<<endl;
 			cout<<"1.更改用户信息"<<endl;
 			cout<<"2.更改班级信息"<<endl; 
-			cout<<"3.联系作者"<<endl; 
-			cout<<"4.查看数据量"<<endl; 
-			cout<<"5.升级"<<endl; 
+			cout<<"3.设置分数限制"<<endl; 
+			cout<<"4.联系作者"<<endl; 
+			cout<<"5.查看数据量"<<endl; 
+			cout<<"6.升级"<<endl; 
 			cout<<"按其他键 返回"<<endl; 
 			cout<<"请输入命令代码：";
 			o[0]=getch();
@@ -1248,9 +1297,43 @@ int main(){
 			}
 			if(o[0]=='3'){
 				system("cls");
-				MessageBox(NULL,"请发送邮件至：\r\nXiyuWang_Code@hotmail.com","学生成绩管理系统",MB_ICONINFORMATION|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+				while(1){ 
+					bool admin;
+					system("cls");
+					start(4);
+					if(MessageBox(NULL,"您需要验证管理员身份！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) admin=user::login(1);
+					else break;
+					if(!admin){
+						MessageBox(NULL,"不可使用学生模式登陆！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+						break;
+					}
+					if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDNO) break;
+					system("cls");
+					cout<<"请输入最高分数限制（默认为100分，最高1000000分）："<<endl;
+					cin>>ScoreControl;
+					if(ScoreControl<1||ScoreControl>1000000)
+						MessageBox(NULL,"无效分数！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+					else{
+						ofstream fout;
+						fout.open("ScoreControl.dat");
+						if(!fout)
+							MessageBox(NULL,"无法保存设置，请检查系统是否已经获得管理员权限！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+						else{
+							fout<<ScoreControl*ScoreControl*ScoreControl+ScoreControl*ScoreControl+ScoreControl<<endl;
+							fout.close();
+							system("cls");
+							cout<<"您已设置 最高分数限制："<<ScoreControl<<"分，如果输入数据超过该限制，将会报错！"<<endl;
+							getch();
+							break;
+						}
+					}
+				}
 			}
 			if(o[0]=='4'){
+				system("cls");
+				MessageBox(NULL,"请发送邮件至：\r\nXiyuWang_Code@hotmail.com","学生成绩管理系统",MB_ICONINFORMATION|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+			}
+			if(o[0]=='5'){
 				ifstream fin;
 				fin.open("ClassEdition.dat");
 				if(fin){
@@ -1263,7 +1346,7 @@ int main(){
 				if(fin&&stuinfo.size()!=0) cout<<"班级 "<<clssnm<<" 中的学生量："<<stuinfo.size()<<endl; 
 				system("pause");
 			}
-			if(o[0]=='5'){
+			if(o[0]=='6'){
 				system("cls");
 				int edition;
 				cout<<"1.64位系统(x64)          2.32位系统(x86)"<<endl<<"请选择要安装的版本：";
