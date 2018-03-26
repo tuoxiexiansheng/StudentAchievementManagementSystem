@@ -9,7 +9,7 @@
 //Code Language: C++
 
 //Lines:1400+
-//Length:43000+ 
+//Length:45000+ 
 
 /* 学生成绩管理系统 描述：
 该系统实现的功能
@@ -18,7 +18,8 @@
 3.五种 查询方式
 4.可更改 用户信息
 5.可锁定系统  
-最新推出：班级模式 
+6.班级模式 
+最新推出：重建班级 & 关闭按钮特效 
 更多功能，敬请期待！ 
 */
 
@@ -190,7 +191,7 @@ namespace user{
 		}
 		fin>>usr; 
 		if(!fin){
-			MessageBox(NULL,"系统错误！\r\n请以管理员身份重新运行程序！","学生成绩管理系统",MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+			MessageBox(NULL,"系统错误！\r\n请以管理员身份重新运行程序！\r\n备注：按关闭按钮并在弹出窗口上选择 是 即可重启系统！","学生成绩管理系统",MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 			ofstream fout;
 			fout.open("ScoreControl.dat");
 			fout<<100*100*100<<endl;
@@ -1247,10 +1248,11 @@ int main(){
 			else cout<<t->tm_min<<endl;
 			cout<<"1.更改用户信息"<<endl;
 			cout<<"2.更改班级信息"<<endl; 
-			cout<<"3.设置分数限制"<<endl; 
-			cout<<"4.联系作者"<<endl; 
-			cout<<"5.查看数据量"<<endl; 
-			cout<<"6.升级"<<endl; 
+			cout<<"3.重建班级"<<endl; 
+			cout<<"4.设置分数限制"<<endl; 
+			cout<<"5.联系作者"<<endl; 
+			cout<<"6.查看数据量"<<endl; 
+			cout<<"7.升级"<<endl; 
 			cout<<"按其他键 返回"<<endl; 
 			cout<<"请输入命令代码：";
 			o[0]=getch();
@@ -1273,15 +1275,30 @@ int main(){
 			}
 			if(o[0]=='2'){
 				while(1){ 
-				string tmp;
-				ifstream fin;
-				fin.open("ClassEdition.dat");
-				fin>>tmp;
-				if(!fin||tmp[0]==0){
-					system("cls");
-					MessageBox(NULL,"您尚未创建班级！\r\n请前往 主页=>学生信息操作=>4.班级模式录入信息 创建班级！","学生成绩管理系统",MB_OK|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND);
-					break;
-				}	
+					string tmp;
+					ifstream fin;
+					fin.open("ClassEdition.dat");
+					fin>>tmp;
+					if(!fin||tmp[0]==0){
+						system("cls");
+						MessageBox(NULL,"您尚未创建班级！\r\n请前往 主页=>学生信息操作=>4.班级模式录入信息 创建班级！","学生成绩管理系统",MB_OK|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND);
+						break;
+					}	
+						bool admin;
+						system("cls");
+						start(4);
+						if(MessageBox(NULL,"您需要验证管理员身份！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) admin=user::login(1);
+						else break;
+						if(!admin){
+							MessageBox(NULL,"不可使用学生模式登陆！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+							break;
+						}
+						if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) ClassEdition::reg();
+						else break;
+				}
+			}
+			if(o[0]=='3'){
+				while(1){ 
 					bool admin;
 					system("cls");
 					start(4);
@@ -1291,11 +1308,11 @@ int main(){
 						MessageBox(NULL,"不可使用学生模式登陆！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 						break;
 					}
-					if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) ClassEdition::reg();
+					if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) ClassEdition::make();
 					else break;
 				}
 			}
-			if(o[0]=='3'){
+			if(o[0]=='4'){
 				system("cls");
 				while(1){ 
 					bool admin;
@@ -1329,11 +1346,11 @@ int main(){
 					}
 				}
 			}
-			if(o[0]=='4'){
+			if(o[0]=='5'){
 				system("cls");
 				MessageBox(NULL,"请发送邮件至：\r\nXiyuWang_Code@hotmail.com","学生成绩管理系统",MB_ICONINFORMATION|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 			}
-			if(o[0]=='5'){
+			if(o[0]=='6'){
 				ifstream fin;
 				fin.open("ClassEdition.dat");
 				if(fin){
@@ -1346,7 +1363,7 @@ int main(){
 				if(fin&&stuinfo.size()!=0) cout<<"班级 "<<clssnm<<" 中的学生量："<<stuinfo.size()<<endl; 
 				system("pause");
 			}
-			if(o[0]=='6'){
+			if(o[0]=='7'){
 				system("cls");
 				int edition;
 				cout<<"1.64位系统(x64)          2.32位系统(x86)"<<endl<<"请选择要安装的版本：";
@@ -1421,37 +1438,46 @@ BOOL CtrlHandler(DWORD fdwCtrlType)
 		//点击了关闭窗口键
         Beep(750, 300);
 		if(stu.size()>0) file::output(1);
-		system("cls");
-		system("title 学生成绩管理系统-正在退出"); 
-		load();
-    	cout<<endl<<"正在退出......"<<endl; 
-		system("title 学生成绩管理系统-正在退出"); 
-		Sleep(1000);
-		exit(0); 
+		if(MessageBox(NULL,"您确定要重启系统或退出系统吗？（按是退出，按否重启）","学生成绩管理系统",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES){
+			system("cls");
+			system("title 学生成绩管理系统-正在退出"); 
+			load();
+	    	cout<<endl<<"正在退出......"<<endl; 
+			system("title 学生成绩管理系统-正在退出"); 
+			Sleep(1000);
+			exit(0); 
+		}
+		else system("SAMS_zh-cn.exe");
  
         /* handle the CTRL-LOGOFF signal */
     case CTRL_LOGOFF_EVENT:
         Beep(750, 300);
 		if(stu.size()>0) file::output(1);
-		system("cls");
-		system("title 学生成绩管理系统-正在退出"); 
-		load();
-    	cout<<endl<<"正在退出......"<<endl; 
-		system("title 学生成绩管理系统-正在退出"); 
-		Sleep(1000);
-		exit(0); 
+		if(MessageBox(NULL,"您确定要重启系统或退出系统吗？（按是退出，按否重启）","学生成绩管理系统",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES){
+			system("cls");
+			system("title 学生成绩管理系统-正在退出"); 
+			load();
+	    	cout<<endl<<"正在退出......"<<endl; 
+			system("title 学生成绩管理系统-正在退出"); 
+			Sleep(1000);
+			exit(0); 
+		}
+		else system("SAMS_zh-cn.exe");
  
         /* handle the CTRL-SHUTDOWN signal */
     case CTRL_SHUTDOWN_EVENT:
         Beep(750, 300);
 		if(stu.size()>0) file::output(1);
-		system("cls");
-		system("title 学生成绩管理系统-正在退出"); 
-		load();
-    	cout<<endl<<"正在退出......"<<endl; 
-		system("title 学生成绩管理系统-正在退出"); 
-		Sleep(1000);
-		exit(0); 
+		if(MessageBox(NULL,"您确定要重启系统或退出系统吗？（按是退出，按否重启）","学生成绩管理系统",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES){
+			system("cls");
+			system("title 学生成绩管理系统-正在退出"); 
+			load();
+	    	cout<<endl<<"正在退出......"<<endl; 
+			system("title 学生成绩管理系统-正在退出"); 
+			Sleep(1000);
+			exit(0); 
+		}
+		else system("SAMS_zh-cn.exe");
  
     default:
         return FALSE;

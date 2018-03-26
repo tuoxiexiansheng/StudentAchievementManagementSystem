@@ -2,12 +2,12 @@
 <h3>这是一个本地管理学生成绩的系统，使用加密🔒过的文件储存信息。</h3>
 <h3>版本：16.9.18</h3>
 <h4>作者：<a href="https://github.com/XiyuWang2006/">XiyuWang2006</a></h4>
-<h3>README.md最近更新日期：2018.3.25</h3>
-<h3>源代码最近更新日期📅：2018.3.25</h3>
+<h3>README.md最近更新日期：2018.3.26</h3>
+<h3>源代码最近更新日期📅：2018.3.26</h3>
 <hr />
 <h3>Windows版本同时支持管理和查询。</h3> 
 <h3>Windows版本学生模式登陆用户名“Student”或“学生”👱，免密码。</h3>
-<h3>本次更新的内容：修复输入密码时按Enter即可进入系统的bug</h3>
+<h3>本次更新的内容：（仅支持64位系统）可以重建班级 & 增加关闭按钮特效</h3>
 <h3>下一次更新内容：待定🏴</h3>
 <hr />
 
@@ -25,11 +25,8 @@
 <h3>4.（Windows版本专属）可以使用学生账户登录，要求输入学生姓名🖋</h3>
 <h3>5.（Windows版本专属）为了用户安全起见，在更改用户密码或班级名称、密码时必须以管理员账户验证🛂（修复学生账户登陆也可以成功通过验证）</h3>
 <h3>6.（Windows版本专属）输入密码时显示密文——若干个*</h3>
-<hr />
-<h2>最新推出功能：数据查错✖（通用版本）</h2>
-<h3>功能：检查成绩是否均为数字或小数</h3>
-<h3>更新前16.9.17版本：成绩含有字母或符号（浮点除外）将会导致成绩为零分</h3>
-<h3>更新后16.9.18版本：成绩含有字母或符号（浮点除外）将会提示用户重新输入数据</h3>
+<h3>7.（Windows版本专属）关闭按钮特效，可以选择退出系统或重启系统</h3>
+<h3>8.（Windows版本专属）当班级学生改动时，可以重建班级</h3>
 <hr />
 <p><a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/tree/master/WindowsEdition/">Windows简体中文版</a>
  <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/tree/master/LinuxEdition/">Linux简体中文版</a></p>
