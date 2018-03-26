@@ -3,40 +3,33 @@
 #include <conio.h> 
 using namespace std;
 int main(){
-		string o;
-		ofstream fout;
-		fout.open("C:\\ProgramData\\StudentAchievementManagementSystem\\Welcome.txt");
-		fout<<"æ¬¢è¿ä½¿ç”¨å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿï¼Œè¿™æ˜¯ä¸€ä¸ªè­¦å‘Šæ–‡ä»¶ï¼Œè¯·å‹¿åˆ é™¤ C:\\ProgramData\\StudentAchievementManagementSystem\\ ï¼Œä¸€æ—¦åˆ é™¤ï¼Œç³»ç»Ÿå°†å´©æºƒï¼"<<endl; 
-		fout.close();
-		system("mkdir C:\\ProgramData\\StudentAchievementManagementSystem");
-		system("title å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ");
-		system("cls");
-		cout<<"æ‚¨å°šæœªæ³¨å†Œï¼Œè¯·è¾“å…¥ç”¨æˆ·åï¼š";
-		cin>>o;
-		fout.open("C:\\ProgramData\\StudentAchievementManagementSystem\\~Control.usr");
-		if(!fout){
-			MessageBox(NULL,"ç³»ç»Ÿé”™è¯¯ï¼\r\nè¯·ä»¥ç®¡ç†å‘˜èº«ä»½é‡æ–°è¿è¡Œç¨‹åºï¼","å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-			exit(0);
-		}
-		fout<<o<<endl;
-		fout.close();
-		cout<<"è¯·è¾“å…¥å¯†ç ï¼š";
-		cin>>o;
-		//åŠ å¯†ç®—æ³•ï¼šASCIIç åŠ 123
-		for(long long i=0;i<=o.size();i++)
-			o[i]=o[i]+123;
-		fout.open("C:\\ProgramData\\StudentAchievementManagementSystem\\~Control.passwd");
-		if(!fout){
-			MessageBox(NULL,"ç³»ç»Ÿé”™è¯¯ï¼\r\nè¯·ä»¥ç®¡ç†å‘˜èº«ä»½é‡æ–°è¿è¡Œç¨‹åºï¼","å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-			exit(0);
-		}
-		fout<<o<<endl;
-		fout.close();
-		system("mkdir %USERPROFILE\\AppData\\Local\\SAMS");
-		fout.open("%USERPROFILE\\AppData\\Local\\SAMS\\~Reg");
-		fout<<1<<endl;
-		fout.close();
-		system("cls");
-		MessageBox(NULL,"æ³¨å†ŒæˆåŠŸï¼","å­¦ç”Ÿæˆç»©ç®¡ç†ç³»ç»Ÿ",MB_ICONINFORMATION|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-		return 0;
+	string o;
+	system("mkdir C:\\ProgramData\\StudentAchievementManagementSystem");
+	system("title Ñ§Éú³É¼¨¹ÜÀíÏµÍ³");
+	system("cls");
+	cout<<"ÄúÉĞÎ´×¢²á£¬ÇëÊäÈëÓÃ»§Ãû£º";
+	cin>>o;
+	ofstream fout; 
+	fout.open("C:\\ProgramData\\StudentAchievementManagementSystem\\~Control.usr");
+	if(!fout){
+		MessageBox(NULL,"ÏµÍ³´íÎó£¡\r\nÇëÒÔ¹ÜÀíÔ±Éí·İÖØĞÂÔËĞĞ³ÌĞò£¡","Ñ§Éú³É¼¨¹ÜÀíÏµÍ³",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+		exit(0);
+	}
+	fout<<o<<endl;
+	fout.close();
+	cout<<"ÇëÊäÈëÃÜÂë£º";
+	cin>>o;
+	//¼ÓÃÜËã·¨£ºASCIIÂë¼Ó123
+	for(long long i=0;i<=o.size();i++)
+		o[i]=o[i]+123;
+	fout.open("C:\\ProgramData\\StudentAchievementManagementSystem\\~Control.passwd");
+	if(!fout){
+		MessageBox(NULL,"ÏµÍ³´íÎó£¡\r\nÇëÒÔ¹ÜÀíÔ±Éí·İÖØĞÂÔËĞĞ³ÌĞò£¡","Ñ§Éú³É¼¨¹ÜÀíÏµÍ³",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+		exit(0);
+	}
+	fout<<o<<endl;
+	fout.close();
+	system("cls");
+	MessageBox(NULL,"×¢²á³É¹¦£¡","Ñ§Éú³É¼¨¹ÜÀíÏµÍ³",MB_ICONINFORMATION|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+	return 0;
 }
