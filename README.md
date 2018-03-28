@@ -28,8 +28,8 @@
 <h3>7.（Windows版本专属）关闭按钮特效，可以选择退出系统或重启系统</h3>
 <h3>8.（Windows版本专属）当班级学生改动时，可以重建班级</h3>
 <hr />
-<p><a href="WindowsEdition/">Windows简体中文版</a>
- <a href="LinuxEdition/">Linux简体中文版</a></p>
+<p><a href="https://xiyuwang2006.github.io/StudentAchievementManagementSystem/WindowsEdition/">Windows简体中文版</a>
+ <a href="https://xiyuwang2006.github.io/StudentAchievementManagementSystem/LinuxEdition/">Linux简体中文版</a></p>
 <hr />
 <h5>⚠注意：请务必使用g++编译，其它编译器可能会报错，也可能运行时出错！</h5>
 <h6>P.S.:StudentAchievementManagementSystem简称SAMS，zh-cn代表简体中文</h6>
