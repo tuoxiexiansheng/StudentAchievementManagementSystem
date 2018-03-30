@@ -3,23 +3,23 @@
 
 //Author: XiyuWang
 //Author E-mail Address: XiyuWang_Code@hotmail.com 
+//GitHub Address: https://xiyuwang2006.github.io/StudentAchievementManagementSystem 
 
-//System Language: zh-cn
+//THIS APPLICATION CAN ONLY RUN ON WINDOWS (BEST ON X64, X32 MAY HAVE SOME RUNTIME ERROR)
 //Description Language: zh-cn
 //Code Language: C++
 
 //Lines:1500+
 //Length:46000+ 
 
-/* 学生成绩管理系统 描述：
-该系统实现的功能
+/* 学生成绩管理系统 功能：
 1.录入+更改+删除 学生信息 
 2.文件 输入+输出
 3.五种 查询方式
 4.可更改 用户信息
 5.可锁定系统  
 6.班级模式 
-最新推出：重建班级 & 关闭按钮特效 
+最新推出：批量删除信息 
 更多功能，敬请期待！ 
 */
 
@@ -43,7 +43,7 @@ BOOL CtrlHandler(DWORD fdwCtrlType);
 long long i,j,n,ti;
 int menl,midl,mnl;//menl:max exam_name length	midl:max id length	mnl:max name length
 string o;//o:order
-unsigned long long ScoreControl,ScoreControlFI;//FI:FileInput 
+long long ScoreControl,ScoreControlFI;//FI:FileInput 
 
 time_t tt = time(NULL);
 tm* t=localtime(&tt);
@@ -80,10 +80,6 @@ struct cmp_si/*si:student info*/{
 };
 set<student_info,cmp_si> stuinfo;
 set<student_info,cmp_si>::iterator siit;//student info iterator
-
-bool tooSmall(double x){
-	return x*x*x+x*x+x<ScoreControlFI;
-}
 
 int max(int a,int b){
 	if(a>b) return a;
@@ -127,7 +123,7 @@ void hit(){
 	system("cls");
 	system("title 学生成绩管理系统"); 
 	cout<<"亲，Windows10系统可以按 F11 全屏，体验最佳效果哦！"<<endl;
-	Sleep(5000);
+	Sleep(2000);
 }
 
 namespace user{ 
@@ -307,8 +303,8 @@ namespace record_input{
 				cout<<"学号："<<it->id<<endl;
 				cout<<"姓名："<<it->name<<endl;
 				cout<<"考试名称："<<it->exam_name<<endl;
-				cout<<"本地成绩："<<it->S<<endl;
-				cout<<"输入成绩："<<z.S<<endl;
+				cout<<"本地成绩："<<fixed<<setprecision(2)<<it->S<<endl;
+				cout<<"输入成绩："<<fixed<<setprecision(2)<<z.S<<endl;
 				cout<<"===================="<<endl;
 				cout<<"是否替换？(Y/N)"; 
 				cin>>o;
@@ -402,7 +398,7 @@ namespace record_input{
 				cout<<"学号："<<it->id<<endl;
 				cout<<"姓名："<<it->name<<endl;
 				cout<<"考试名称："<<it->exam_name<<endl; 
-				cout<<"成绩："<<it->S<<endl;
+				cout<<"成绩："<<fixed<<setprecision(2)<<it->S<<endl;
 				if(MessageBox(NULL,"您确定要删除该学生的信息吗？","学生成绩管理系统",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES){
 					z.id=it->id;
 					stu.erase(it);
@@ -421,6 +417,48 @@ namespace record_input{
 		cin>>o;
 		if(o[0]=='Y'||o[0]=='y') goto rds;
 		else return 0; 
+	}
+	int rexam_nameDelete(){
+		 system("cls");
+		 cout<<"请输入考试名称：";
+		 cin>>z.exam_name;
+		 system("cls");	
+		 cout<<"日志："<<endl;
+		 cout<<"正在删除考试名称为 "<<z.exam_name<<" 的所有信息"<<endl;
+		 for(i=0;i<stu.size();i++){
+		 	it=stu.begin();
+			if(it->exam_name==z.exam_name){
+				cout<<"已删除"<<i<<"条信息（学号："<<it->id<<" 姓名："<<it->name<<" 分数："<<fixed<<setprecision(2)<<it->S<<"）"<<endl;
+				stu.erase(it);
+				it=stu.begin();
+			}
+			else it++;
+		}
+		if(i==0){
+			system("cls");
+			MessageBox(NULL,"未找到符合的考试，请检查信息是否已经录入系统！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+			return 1;
+		}
+		 for(i=0;i<stu.size();i++){
+		 	it=stu.begin();
+			if(it->exam_name==z.exam_name){
+				cout<<"已删除"<<i<<"条信息（学号："<<it->id<<" 姓名："<<it->name<<" 分数："<<fixed<<setprecision(2)<<it->S<<"）"<<endl;
+				stu.erase(it);
+				it=stu.begin();
+			}
+			else it++;
+		}
+		 for(i=0;i<stu.size();i++){
+		 	it=stu.begin();
+			if(it->exam_name==z.exam_name){
+				cout<<"已删除"<<i<<"条信息（学号："<<it->id<<" 姓名："<<it->name<<" 分数："<<fixed<<setprecision(2)<<it->S<<"）"<<endl;
+				stu.erase(it);
+				it=stu.begin();
+			}
+			else it++;
+		}
+		getch();
+		return 0;
 	}
 	//record operation end
 }
@@ -848,8 +886,8 @@ namespace file{
 					cout<<"学号："<<it->id<<endl; 
 					cout<<"姓名："<<it->name<<endl;
 					cout<<"考试名称："<<it->exam_name<<endl;
-					cout<<"本地成绩："<<it->S<<endl;
-					cout<<"文件成绩："<<z.S<<endl; 
+					cout<<"本地成绩："<<fixed<<setprecision(2)<<it->S<<endl;
+					cout<<"文件成绩："<<fixed<<setprecision(2)<<z.S<<endl; 
 					cout<<"===================================="<<endl;
 					cout<<"1.本地                        2.文件"<<endl; 
 					cout<<"请选择要保留的信息（序号）："; 
@@ -1029,7 +1067,7 @@ namespace ClassEdition{
 					cout<<"学号："<<it->id<<endl;
 					cout<<"姓名："<<it->name<<endl;
 					cout<<"考试名称："<<it->exam_name<<endl; 
-					cout<<"本地成绩："<<it->S<<endl; 
+					cout<<"本地成绩："<<fixed<<setprecision(2)<<it->S<<endl; 
 					cout<<"输入成绩："<<tmp<<endl; 
 					cout<<"错误：该学生信息已存在！"<<endl;
 					cout<<"================================="<<endl;
@@ -1039,7 +1077,7 @@ namespace ClassEdition{
 					if(o[0]!='1'&&o[0]!='2') goto ef;
 					break;  
 				}
-			if(z.S>ScoreControl){
+			if(z.S>ScoreControl+0.999999){
 				system("cls");
 				cout<<"成绩超过最大限制！"<<endl;
 				getch();
@@ -1077,8 +1115,8 @@ int main(){
 				if(!fout)
 					MessageBox(NULL,"无法保存设置，请检查系统是否已经获得管理员权限！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 				else{
-				fout<<ScoreControl*ScoreControl*ScoreControl+ScoreControl*ScoreControl+ScoreControl<<endl;
-				fout.close();
+					fout<<ScoreControl*80123750<<endl;
+					fout.close();
 					system("cls");
 					cout<<"您已设置 最高分数限制："<<ScoreControl<<"分，如果输入数据超过该限制，将会报错！"<<endl;
 					getch();
@@ -1087,13 +1125,7 @@ int main(){
 		}
 		else{ 
 			fin>>ScoreControlFI; 
-			double l=-100,r=100;
-			while(r-l>ERR){
-				double mid=l+(r-l)/2;
-				if(tooSmall(mid)) l=mid;
-				else r=mid;
-			} 
-			ScoreControl=l;
+			ScoreControl=ScoreControlFI/80123750;
 		}
 	}
 	while(o[0]!='E'){
@@ -1188,7 +1220,8 @@ int main(){
 			cout<<"1.录入学生信息"<<endl;
 			cout<<"2.更改学生信息"<<endl; 
 			cout<<"3.删除学生信息"<<endl; 
-			cout<<"4.班级模式录入信息（当前班级："<<clssnm<<"）"<<endl; 
+			cout<<"4.删除特定考试内所有学生的信息"<<endl; 
+			cout<<"5.班级模式录入信息（当前班级："<<clssnm<<"）"<<endl; 
 			cout<<"按其他键 返回"<<endl;
 			cout<<"请输入命令代码：";
 			o[0]=getch(); 
@@ -1200,14 +1233,14 @@ int main(){
 			}
 			if(o[0]=='2') record_input::rchange();
 			if(o[0]=='3') record_input::rdelete();
-			if(o[0]=='4'){
+			if(o[0]=='4') record_input::rexam_nameDelete(); 
+			if(o[0]=='5'){
 				system("cls");
 				ifstream fin;
 				fin.open("ClassEdition.dat");
 				if(!fin){
 					cout<<"您尚未创建班级！请按任意键继续......"<<endl;
-					cout<<"注意：班级模式中的班级名和密码可以更改，学生信息一旦录入系统将无法更改，请在输入时仔细检查姓名和学号！"<<endl;
-					cout<<"如果要取消创建班级，请关闭本系统！"<<endl; 
+					cout<<"如果要取消创建班级，请按关闭按钮，选择否，重启系统！"<<endl; 
 					getch();
 					ClassEdition::make();
 				}
@@ -1366,7 +1399,7 @@ int main(){
 						if(!fout)
 							MessageBox(NULL,"无法保存设置，请检查系统是否已经获得管理员权限！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 						else{
-							fout<<ScoreControl*ScoreControl*ScoreControl+ScoreControl*ScoreControl+ScoreControl<<endl;
+							fout<<ScoreControl*80123750<<endl;
 							fout.close();
 							system("cls");
 							cout<<"您已设置 最高分数限制："<<ScoreControl<<"分，如果输入数据超过该限制，将会报错！"<<endl;
