@@ -7,11 +7,14 @@
 
 //THIS APPLICATION CAN ONLY RUN ON WINDOWS (BEST ON X64, X32 MAY HAVE SOME RUNTIME ERROR)
 <<<<<<< HEAD
+<<<<<<< HEAD
 //Description Language: zh-cn
 //Code Language: C++
 
 //Lines:1500+
 //Length:46000+ 
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 
@@ -27,6 +30,7 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 //#include <bits/stdc++.h> 
 #include <windows.h>
 #include <iostream>
@@ -41,6 +45,9 @@
 #include <set> 
 //11 Files included
 #define ERR 0.000001
+=======
+#include "include.h"
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 #include "include.h"
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
@@ -97,7 +104,10 @@ void start(int len){
 	srand(time(0));
 	string key,ans;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	;
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 	system("cls");
@@ -136,6 +146,7 @@ void hit(){
 	Sleep(2000);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 namespace user{ 
 	//user operation 
@@ -250,6 +261,8 @@ namespace user{
 		long long i=0;
 		
 =======
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 namespace ClassEdition{
 	//Class Edition
 	int reg(){
@@ -346,6 +359,9 @@ namespace ClassEdition{
 		cout<<"班级模式-登陆"<<endl; 
 		cout<<"班级名称："<<clssnm<<endl;
 		cout<<"密码：";
+<<<<<<< HEAD
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		int ii;
 		srand(time(0));
@@ -354,6 +370,7 @@ namespace ClassEdition{
 			o[ii]=tmp;
 			for(int iii=0;iii<rand()%5;iii++,cout<<"*");
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if(ii==0)
 			if(o[i]!=passwd[i]||ii!=passwd.length()){
@@ -476,6 +493,8 @@ namespace record_input{
 		inputScore:
 		cout<<"请输入成绩：";
 =======
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		for(i=0;i<ii;i++){
 			if(o[i]!=passwd[i]||ii!=passwd.length()){
 				MessageBox(NULL,"密码错误！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
@@ -800,6 +819,9 @@ namespace record_input{
 		string ttmp;
 		inputScore:
 		cout<<"请输入成绩：";
+<<<<<<< HEAD
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		cin>>ttmp;
 		for(int iii=0;iii<ttmp.size();iii++)
@@ -862,8 +884,13 @@ namespace record_input{
 		 cout<<"日志："<<endl;
 		 cout<<"正在删除考试名称为 "<<z.exam_name<<" 的所有信息"<<endl;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		 for(i=0;i<stu.size();i++){
 		 	it=stu.begin();
+=======
+		 bool found=false;
+		 for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 		 bool found=false;
 		 for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
@@ -873,20 +900,27 @@ namespace record_input{
 				stu.erase(it);
 				it=stu.begin();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			}
 			else it++;
 		}
 		if(i==0){
 =======
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				found=true;
 			}
 		}
 		if(!found){
+<<<<<<< HEAD
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 			system("cls");
 			MessageBox(NULL,"未找到符合的考试，请检查信息是否已经录入系统！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 			return 1;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 		 for(i=0;i<stu.size();i++){
 		 	it=stu.begin();
@@ -906,6 +940,8 @@ namespace record_input{
 			}
 			else it++;
 		}
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		getch();
@@ -914,6 +950,10 @@ namespace record_input{
 	//record operation end
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
@@ -996,6 +1036,9 @@ namespace record_output{
 				cout<<endl;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 			if(it->id==tmp||it->name==tmp){
 				if(i<10) cout<<i<<"    |";
 				if(i>=10&&i<100) cout<<i<<"   |";
@@ -1057,8 +1100,11 @@ namespace record_output{
 				cout<<endl;
 			}
 			if(it->exam_name==tmp){
+<<<<<<< HEAD
 =======
 			if(it->id==tmp||it->name==tmp){
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				if(i<10) cout<<i<<"    |";
 				if(i>=10&&i<100) cout<<i<<"   |";
@@ -1088,17 +1134,23 @@ namespace record_output{
 		}
 		system("cls");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		MessageBox(NULL,"未找到该考试中任何学生的信息，请检查信息是否已经录入系统！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		return 1;
 	}
 	//output information between given lowest score and given highest score
 	int find_score(){
+<<<<<<< HEAD
 =======
 		MessageBox(NULL,"未找到该学生的信息，请检查信息是否已经录入系统！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		return 1;
 	}
 	//output information in given examname
 	int find_examname(){
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		system("cls");
 		if(stu.size()<1){
@@ -1109,15 +1161,21 @@ namespace record_output{
 		bool f=false; 
 		z.exam_name=' ';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		int l,h;//l:lowest,h:highest
 		cout<<"请输入最低分数：";
 		cin>>l;
 		cout<<"请输入最高分数：";
 		cin>>h; 
+<<<<<<< HEAD
 =======
 		string tmp;
 		cout<<"请输入考试名称：";
 		cin>>tmp;
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		clock_t start = clock();
 		cout<<"排名 |学号 ";
@@ -1136,9 +1194,13 @@ namespace record_output{
 				cout<<endl;
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if(it->S>=l&&it->S<=h){
 =======
 			if(it->exam_name==tmp){
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
+			if(it->S>=l&&it->S<=h){
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				if(i<10) cout<<i<<"    |";
 				if(i>=10&&i<100) cout<<i<<"   |";
@@ -1168,6 +1230,9 @@ namespace record_output{
 		}
 		system("cls");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		MessageBox(NULL,"未找到该分数段中任何学生的信息，请检查信息是否已经录入系统！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		return 1;
 	}
@@ -1175,6 +1240,7 @@ namespace record_output{
 	int find_clssnm(){
 		string clssnm,pwd;
 		int n;
+<<<<<<< HEAD
 =======
 		MessageBox(NULL,"未找到该考试中任何学生的信息，请检查信息是否已经录入系统！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		return 1;
@@ -1182,12 +1248,17 @@ namespace record_output{
 	//output information between given lowest score and given highest score
 	int find_score(){
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		system("cls");
 		if(stu.size()<1){
 			MessageBox(NULL,"暂无记录！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND);
 			return 1;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		ifstream fin;	
 		fin.open("ClassEdition.dat");
 		fin>>clssnm>>pwd>>n;
@@ -1203,6 +1274,7 @@ namespace record_output{
 		double Average,All;
 		bool f=false; 
 		z.exam_name=' ';
+<<<<<<< HEAD
 =======
 		double Average,All;
 		bool f=false; 
@@ -1212,6 +1284,8 @@ namespace record_output{
 		cin>>l;
 		cout<<"请输入最高分数：";
 		cin>>h; 
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 		clock_t start = clock();
 		cout<<"排名 |学号 ";
@@ -1225,6 +1299,9 @@ namespace record_output{
 			if(z.exam_name!=it->exam_name&&i!=1){
 				Average=All/(i-1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				All=0;
 				i=1;
 				cout<<"平均分："<<Average<<endl;
@@ -1261,6 +1338,7 @@ namespace record_output{
 	//record output end
 }
 
+<<<<<<< HEAD
 namespace file{
 	//file operation
 	int output(bool save){
@@ -1723,6 +1801,38 @@ int main(){
 					cout<<"您已设置 最高分数限制："<<ScoreControl<<"分，如果输入数据超过该限制，将会报错！"<<endl;
 					getch();
 				}
+=======
+int main(){
+	system("cls");
+	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
+	string clssnm,pwd;
+	int n;
+	int size,sizetmp;
+	system("color f0");
+	ti=t->tm_min; 
+	bool usr;
+	load(); hit(); start(4); usr=user::login(1); load(); file::input(1);
+	if(usr){
+		ifstream fin;
+		fin.open("ScoreControl.dat");
+		if(!fin){
+			cout<<"请输入最高分数限制（默认为100分，最高1000000分）："<<endl;
+			cin>>ScoreControl;
+			if(ScoreControl<1||ScoreControl>1000000)
+				MessageBox(NULL,"无效分数！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+			else{
+				ofstream fout;
+				fout.open("ScoreControl.dat");
+				if(!fout)
+					MessageBox(NULL,"无法保存设置，请检查系统是否已经获得管理员权限！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+				else{
+					fout<<ScoreControl*80123750<<endl;
+					fout.close();
+					system("cls");
+					cout<<"您已设置 最高分数限制："<<ScoreControl<<"分，如果输入数据超过该限制，将会报错！"<<endl;
+					getch();
+				}
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 			}
 		}
 		else{ 
@@ -1836,8 +1946,11 @@ int main(){
 			if(o[0]=='2') record_input::rchange();
 			if(o[0]=='3') record_input::rdelete();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if(o[0]=='4') record_input::rexam_nameDelete(); 
 =======
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 			if(o[0]=='4'){
 				while(1){
 					bool admin;
@@ -1855,6 +1968,9 @@ int main(){
 					break;
 				}
 			}
+<<<<<<< HEAD
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 			if(o[0]=='5'){
 				system("cls");
@@ -1970,6 +2086,7 @@ int main(){
 						break;
 					}	
 <<<<<<< HEAD
+<<<<<<< HEAD
 						bool admin;
 						system("cls");
 						start(4);
@@ -1982,6 +2099,8 @@ int main(){
 						if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) ClassEdition::reg();
 						else break;
 =======
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 					bool admin;
 					system("cls");
 					start(4);
@@ -1993,6 +2112,9 @@ int main(){
 					}
 					if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) ClassEdition::reg();
 					break; 
+<<<<<<< HEAD
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				}
 			}
@@ -2009,7 +2131,11 @@ int main(){
 					}
 					if(MessageBox(NULL,"验证通过！\r\n按是继续，按否停止更改！","学生成绩管理系统",MB_YESNO|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) ClassEdition::make();
 <<<<<<< HEAD
+<<<<<<< HEAD
 					else break;
+=======
+					break;
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 					break;
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
@@ -2048,6 +2174,10 @@ int main(){
 						}
 					}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+					break;
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 					break;
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
@@ -2072,6 +2202,7 @@ int main(){
 			}
 			if(o[0]=='7'){
 				system("cls");
+<<<<<<< HEAD
 <<<<<<< HEAD
 				int edition;
 				cout<<"1.64位系统(x64)          2.32位系统(x86)"<<endl<<"请选择要安装的版本：";
@@ -2115,6 +2246,8 @@ int main(){
 					cout<<"这神马版本的系统？！还有这种操作？！ (+_+)?"<<endl;
 					getch(); 
 =======
+=======
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				system("del D:\\SAMS_zh-cn_installer.rar");
 				system("cls");
 				cout<<"正在使用 wget 下载 安装程序 所需的最新资源，请勿关闭程序......"<<endl;
@@ -2133,6 +2266,9 @@ int main(){
 					cout<<"请先卸载旧软件，然后解压压缩包，运行安装程序，重装本系统！"<<endl;
 					cout<<"注意：正常重装系统（请注意是在“正常情况下”）不会导致学生信息的丢失！"<<endl; 
 					getch();
+<<<<<<< HEAD
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
+=======
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 				}
 			}
@@ -2148,6 +2284,10 @@ int main(){
 	return 0; 
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 =======
 
 >>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
