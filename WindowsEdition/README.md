@@ -1,4 +1,4 @@
-﻿﻿# Windows Edition
+# Windows Edition
 <h3>学生成绩管理系统 Windows系统版本</h3>
 <h3>⚠注意：下载可执行文件包时请注意Windows版本（32位或64位），版本错误会提示不兼容！<h3>
 <h4>作者：<a href="https://github.com/XiyuWang2006/">XiyuWang2006</a></h4>
