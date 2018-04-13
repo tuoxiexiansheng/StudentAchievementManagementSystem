@@ -3,6 +3,7 @@
 <h3>版本：16.9.18</h3>
 <h4>作者：<a href="https://github.com/XiyuWang2006/">XiyuWang2006</a></h4>
 <h4><a href="https://xiyuwang2006.github.io/MyWork/StudentAchievementManagementSystem/">跳转至网站</a>  <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/">跳转至GitHub</a></h4>
+<<<<<<< HEAD
 <h3>README.md最近更新日期：2018.3.30</h3>
 <h3>源代码最近更新日期📅：2018.3.30</h3>
 <h3>⚠注意：本次系统实施文件操作更新，下载程序后请删除原有的ScoreControl.dat文件！</h3>
@@ -10,6 +11,14 @@
 <h3>Windows版本同时支持管理和查询。</h3> 
 <h3>Windows版本学生模式登陆用户名“Student”或“学生”👱，免密码。</h3>
 <h3>本次更新的内容：支持批量删除信息，修复了关于成绩最高限制的bug</h3>
+=======
+<h3>README.md最近更新日期：2018.4.12</h3>
+<h3>源代码最近更新日期📅：2018.4.12</h3>
+<hr />
+<h3>Windows版本同时支持管理和查询。</h3> 
+<h3>Windows版本学生模式登陆用户名“Student”或“学生”👱，免密码。</h3>
+<h3>本次更新的内容：修复了批量删除时无法删除并卡死的bug。</h3>
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 <h3>下一次更新内容：待定🏴</h3>
 <hr />
 

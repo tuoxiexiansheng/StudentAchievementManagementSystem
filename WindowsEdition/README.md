@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Windows Edition
+=======
+﻿# Windows Edition
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 <h3>学生成绩管理系统 Windows系统版本</h3>
 <h3>⚠注意：下载可执行文件包时请注意Windows版本（32位或64位），版本错误会提示不兼容！<h3>
 <h4>作者：<a href="https://github.com/XiyuWang2006/">XiyuWang2006</a></h4>
@@ -12,6 +16,10 @@
  <p>
   <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/raw/master/WindowsEdition/SAMS_zh-cn.x64.rar">64位系统可执行文件包</a>
   <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/raw/master/WindowsEdition/SAMS_zh-cn.x86.rar">32位系统可执行文件包</a>
+<<<<<<< HEAD
   <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/raw/master/WindowsEdition/SAMS_zh-cn_installer.x64.rar">64位系统安装程序</a>
+=======
+  <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/raw/master/WindowsEdition/SAMS_zh-cn_installer.rar">安装程序</a>
+>>>>>>> 551148ec541725cdb5fbdb091894a3d15edcea2f
 </p>
 <hr />
