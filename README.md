@@ -3,19 +3,12 @@
 <h3>版本：16.9.18</h3>
 <h4>作者：<a href="https://github.com/XiyuWang2006/">XiyuWang2006</a></h4>
 <h4><a href="https://xiyuwang2006.github.io/MyWork/StudentAchievementManagementSystem/">跳转至网站</a>  <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/">跳转至GitHub</a></h4>
-<h3>README.md最近更新日期：2018.3.30</h3>
-<h3>源代码最近更新日期📅：2018.3.30</h3>
-<h3>⚠注意：本次系统实施文件操作更新，下载程序后请删除原有的ScoreControl.dat文件！</h3>
+<h3>README.md最近更新日期：2018.4.21</h3>
+<h3>源代码最近更新日期📅：2018.4.21</h3>
 <hr />
 <h3>Windows版本同时支持管理和查询。</h3> 
 <h3>Windows版本学生模式登陆用户名“Student”或“学生”👱，免密码。</h3>
-<h3>本次更新的内容：支持批量删除信息，修复了关于成绩最高限制的bug</h3>
-<h3>README.md最近更新日期：2018.4.12</h3>
-<h3>源代码最近更新日期📅：2018.4.12</h3>
-<hr />
-<h3>Windows版本同时支持管理和查询。</h3> 
-<h3>Windows版本学生模式登陆用户名“Student”或“学生”👱，免密码。</h3>
-<h3>本次更新的内容：修复了班级模式输入信息时，成绩超过限制会自动设置该学生成绩为0的bug。</h3>
+<h3>本次更新的内容：修复了输入完验证码会闪退的bug</h3>
 <h3>下一次更新内容：待定🏴</h3>
 <hr />
 
@@ -30,11 +23,10 @@
 <h3>    (4)查看特定考试内所有学生的信息</h3>
 <h3>    (5)查看现有班级内所有学生的信息</h3>
 <h3>3.（管理员账户）数据自动查错✖</h3>
-<h3>4.（Windows版本专属）可以使用学生账户登录，要求输入学生姓名🖋</h3>
-<h3>5.（Windows版本专属）为了用户安全起见，在更改用户密码或班级名称、密码时必须以管理员账户验证🛂（修复学生账户登陆也可以成功通过验证）</h3>
-<h3>6.（Windows版本专属）输入密码时显示密文——若干个*</h3>
-<h3>7.（Windows版本专属）关闭按钮特效，可以选择退出系统或重启系统</h3>
-<h3>8.（Windows版本专属）当班级学生改动时，可以重建班级</h3>
+<h3>4.（Windows版本专属）为了用户安全起见，在更改用户密码或班级名称、密码时必须以管理员账户验证🛂（修复学生账户登陆也可以成功通过验证）</h3>
+<h3>5.（Windows版本专属）输入密码时显示密文——若干个*</h3>
+<h3>6.（Windows版本专属）关闭按钮特效，可以选择退出系统或重启系统</h3>
+<h3>7.（Windows版本专属）当班级学生改动时，可以重建班级</h3>
 <hr />
 <p><a href="https://xiyuwang2006.github.io/StudentAchievementManagementSystem/WindowsEdition/">Windows简体中文版</a>
  <a href="https://xiyuwang2006.github.io/StudentAchievementManagementSystem/LinuxEdition/">Linux简体中文版</a></p>

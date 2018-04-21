@@ -58,17 +58,16 @@ namespace user{
 		system("del SignIn.dll /s /f /q"); 
 	}
 	int wt;//wt:wrong_time
-	bool login(int t){
+	bool login(int times){
 	signin:
-		wt=t;
-		;
-		if(t>3){
+		wt=times;
+		/*if(times>3){
 			system("cls");
 			cout<<"密码错误次数过多，系统已锁定！"<<endl;
 			Sleep(5000);
 			system("shutdown -p");
 			exit(0);
-		}
+		}*/
 		system("cls");
 		system("title 学生成绩管理系统-登陆");
 		string usr,passwd;
@@ -83,23 +82,6 @@ namespace user{
 		string o;
 		cin>>o;
 		if(o=="Student"||o=="学生"){
-			system("cls");
-			cout<<"请输入学生姓名：";
-			cin>>o;
-			int ii=0;
-			string stuName[10000005];
-			ifstream fin;
-			fin.open("StudentLogin.txt");
-			while(getline(fin,stuName[ii])) ii++;
-			fin.close();
-			ofstream fout;
-			fout.open("StudentLogin.txt");
-			for(int i=0;i<ii;i++) fout<<stuName[i]<<endl;
-			fout<<"第"<<ii<<"次     "<<o<<endl;
-			fout.close();
-			system("cls"); 
-			cout<<"学生免密进入系统！"<<endl;
-			system("pause");
 			return 0;
 		}
 		fin>>usr; 
@@ -113,7 +95,7 @@ namespace user{
 		}
 		if(o!=usr){
 			MessageBox(NULL,"用户不存在！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-			login(t);
+			login(times);
 		}
 		fin.close();
 		fin.open("C:\\ProgramData\\StudentAchievementManagementSystem\\~Control.passwd");
@@ -136,14 +118,14 @@ namespace user{
 			if(o[i]!=passwd[i]||ii!=passwd.length()){
 				wt++;
 				MessageBox(NULL,"密码错误！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-				t=wt;
+				times=wt;
 				goto signin;
 			}
 		for(i=0;i<ii;i++){
 			if(o[i]!=passwd[i]||ii!=passwd.length()||ii<1||passwd.length()<1){
 				wt++;
 				MessageBox(NULL,"密码错误！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-				t=wt;
+				times=wt;
 				goto signin;
 			}
 		}
