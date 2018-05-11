@@ -22,6 +22,7 @@
 using namespace std;
 
 BOOL CtrlHandler(DWORD fdwCtrlType);
+bool ROSid=1,ROSname=1,ROSnum=1;
 long long i,j,n,ti;
 int menl,midl,mnl;//menl:max exam_name length	midl:max id length	mnl:max name length
 string o;//o:order
@@ -66,6 +67,29 @@ set<student_info,cmp_si>::iterator siit;//student info iterator
 int max(int a,int b){
 	if(a>b) return a;
 	return b;
+}
+
+bool adminCheck(){
+	ofstream fout;
+	fout.open("AdminAccess.txt");
+	if(!fout) return 0;
+	fout<<"SAMS has alreay gotten the admin access!"<<endl;
+	fout<<"This file will be deleted by SAMS program in 1 minute!"<<endl;
+	fout.close();
+	system("del AdminAccess.txt /f/q");
+	return 1;
+}
+
+bool DriverCheck(){
+	ofstream fout;
+	fout.open("D:\\DriverExist.txt");
+	if(!fout) return 0;
+	fout<<"SAMS is checking if Drive 'D:' exists!"<<endl;
+	fout<<"Result: Exist!"<<endl;
+	fout<<"This file will be deleted by SAMS program in 1 minute!"<<endl;
+	fout.close();
+	system("del DriverExist.txt /f/q");
+	return 1;
 }
 
 void start(int len){
@@ -615,6 +639,73 @@ namespace record_input{
 }
 
 namespace record_output{
+	//record output settings
+	void Settings(){
+		while(1){
+			system("cls");
+			while(1){
+				ifstream fin;
+				fin.open("ROS.dat");
+				fin>>ROSnum>>ROSid>>ROSname;
+				fin.close();
+				break;
+			}
+			cout<<"学生成绩管理系统-查询设置"<<endl;
+			if(ROSnum) cout<<"(√) ";
+			else cout<<"(×) "; 
+			cout<<"1.显示排名"<<endl; 
+			if(ROSid) cout<<"(√) ";
+			else cout<<"(×) "; 
+			cout<<"2.显示学号"<<endl; 
+			if(ROSname) cout<<"(√) ";
+			else cout<<"(×) "; 
+			cout<<"3.显示姓名"<<endl;
+			cout<<"(√) 4.退出设置"<<endl; 
+			o[0]=getch();
+			if(o[0]=='1'){
+				if(ROSnum) ROSnum=0;
+				else ROSnum=1;
+			}
+			if(o[0]=='2'){
+				ROSid?ROSid=0:ROSid=1;
+				if(!ROSid&&!ROSname){
+					MessageBox(NULL,"学号和姓名中必须有一项选中！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+					ROSid=1;
+				}
+			}
+			if(o[0]=='3'){
+				ROSname?ROSname=0:ROSname=1;
+				if(!ROSid&&!ROSname){
+					MessageBox(NULL,"学号和姓名中必须有一项选中！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+					ROSname=1;
+				}
+			}
+			while(1){
+				ofstream fout;
+				fout.open("ROS.dat");
+				fout<<ROSnum<<" "<<ROSid<<" "<<ROSname;
+				fout.close();
+				break;
+			}
+			if(o[0]=='4'){
+				system("cls");
+				cout<<"学生成绩管理系统-查询设置"<<endl;
+				if(ROSnum) cout<<"(√) ";
+				else cout<<"(×) "; 
+				cout<<"1.显示排名"<<endl; 
+				if(ROSid) cout<<"(√) ";
+				else cout<<"(×) "; 
+				cout<<"2.显示学号"<<endl; 
+				if(ROSname) cout<<"(√) ";
+				else cout<<"(×) "; 
+				cout<<"3.显示姓名"<<endl;
+				cout<<"(×) 4.退出设置"<<endl; 
+				Sleep(500);
+				break;
+			}
+			o[0]=0;
+		}
+	}
 	//record output (five ways)
 	//output all information
 	int output(){
@@ -626,11 +717,18 @@ namespace record_output{
 		}
 		clock_t start = clock();
 		z.exam_name=' ';
-		cout<<"排名 |学号 ";
-		for(i=midl;i>4;i--) cout<<" ";
-		cout<<"|姓名 ";
-		for(i=mnl;i>4;i--) cout<<" ";
-		cout<<"|考试名称 ";
+		if(ROSnum) cout<<"排名 |";
+		if(ROSid){
+			cout<<"学号 ";
+			for(i=midl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
+		if(ROSname){
+			cout<<"姓名 ";
+			for(i=mnl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
+		cout<<"考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
 		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
@@ -641,16 +739,24 @@ namespace record_output{
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
-			if(i<10) cout<<i<<"    |";
-			if(i>=10&&i<100) cout<<i<<"   |";
-			if(i>=100&&i<1000) cout<<i<<"  |";
-			if(i>=1000&&i<10000) cout<<i<<" |";
-			if(i>=10000&&i<100000) cout<<i<<"|";
-			cout<<it->id;
-			for(j=midl;j>=it->id.length();j--) cout<<" ";
-			cout<<"|"<<it->name;
-			for(j=mnl;j>=it->name.length();j--) cout<<" ";
-			cout<<"|"<<it->exam_name;
+			if(ROSnum){
+				if(i<10) cout<<i<<"    |";
+				if(i>=10&&i<100) cout<<i<<"   |";
+				if(i>=100&&i<1000) cout<<i<<"  |";
+				if(i>=1000&&i<10000) cout<<i<<" |";
+				if(i>=10000&&i<100000) cout<<i<<"|";
+			}
+			if(ROSid){
+				cout<<it->id;
+				for(j=midl;j>=it->id.length();j--) cout<<" ";
+				cout<<"|";
+			}
+			if(ROSname){
+				cout<<it->name;
+				for(j=mnl;j>=it->name.length();j--) cout<<" ";
+				cout<<"|";
+			}
+			cout<<it->exam_name;
 			for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 			cout<<"|"<<setprecision(2)<<fixed<<it->S;
 			cout<<endl;
@@ -677,10 +783,17 @@ namespace record_output{
 		cout<<"请输入学生学号或姓名：";
 		cin>>tmp;
 		clock_t start = clock();
-		cout<<"排名 |学号 ";
-		for(i=midl;i>4;i--) cout<<" ";
-		cout<<"|姓名 ";
-		for(i=mnl;i>4;i--) cout<<" ";
+		if(ROSnum) cout<<"排名 |";
+		if(ROSid){
+			cout<<"学号 ";
+			for(i=midl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
+		if(ROSname){
+			cout<<"姓名 ";
+			for(i=mnl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
 		cout<<"|考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
@@ -693,16 +806,24 @@ namespace record_output{
 				cout<<endl;
 			}
 			if(it->id==tmp||it->name==tmp){
-				if(i<10) cout<<i<<"    |";
-				if(i>=10&&i<100) cout<<i<<"   |";
-				if(i>=100&&i<1000) cout<<i<<"  |";
-				if(i>=1000&&i<10000) cout<<i<<" |";
-				if(i>=10000&&i<100000) cout<<i<<"|";
-				cout<<it->id;
-				for(j=midl;j>=it->id.length();j--) cout<<" ";
-				cout<<"|"<<it->name;
-				for(j=mnl;j>=it->name.length();j--) cout<<" ";
-				cout<<"|"<<it->exam_name;
+				if(ROSnum){
+					if(i<10) cout<<i<<"    |";
+					if(i>=10&&i<100) cout<<i<<"   |";
+					if(i>=100&&i<1000) cout<<i<<"  |";
+					if(i>=1000&&i<10000) cout<<i<<" |";
+					if(i>=10000&&i<100000) cout<<i<<"|";
+				}
+				if(ROSid){
+					cout<<it->id;
+					for(j=midl;j>=it->id.length();j--) cout<<" ";
+					cout<<"|";
+				}
+				if(ROSname){
+					cout<<it->name;
+					for(j=mnl;j>=it->name.length();j--) cout<<" ";
+					cout<<"|";
+				}
+				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 				cout<<"|"<<setprecision(2)<<fixed<<it->S;
 				cout<<endl;
@@ -737,10 +858,17 @@ namespace record_output{
 		cout<<"请输入考试名称：";
 		cin>>tmp;
 		clock_t start = clock();
-		cout<<"排名 |学号 ";
-		for(i=midl;i>4;i--) cout<<" ";
-		cout<<"|姓名 ";
-		for(i=mnl;i>4;i--) cout<<" ";
+		if(ROSnum) cout<<"排名 |";
+		if(ROSid){
+			cout<<"学号 ";
+			for(i=midl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
+		if(ROSname){
+			cout<<"姓名 ";
+			for(i=mnl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
 		cout<<"|考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
@@ -752,17 +880,24 @@ namespace record_output{
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
-			if(it->exam_name==tmp){
-				if(i<10) cout<<i<<"    |";
-				if(i>=10&&i<100) cout<<i<<"   |";
-				if(i>=100&&i<1000) cout<<i<<"  |";
-				if(i>=1000&&i<10000) cout<<i<<" |";
-				if(i>=10000&&i<100000) cout<<i<<"|";
-				cout<<it->id;
-				for(j=midl;j>=it->id.length();j--) cout<<" ";
-				cout<<"|"<<it->name;
-				for(j=mnl;j>=it->name.length();j--) cout<<" ";
-				cout<<"|"<<it->exam_name;
+			if(it->exam_name==tmp){	if(ROSnum){
+					if(i<10) cout<<i<<"    |";
+					if(i>=10&&i<100) cout<<i<<"   |";
+					if(i>=100&&i<1000) cout<<i<<"  |";
+					if(i>=1000&&i<10000) cout<<i<<" |";
+					if(i>=10000&&i<100000) cout<<i<<"|";
+				}
+				if(ROSid){
+					cout<<it->id;
+					for(j=midl;j>=it->id.length();j--) cout<<" ";
+					cout<<"|";
+				}
+				if(ROSname){
+					cout<<it->name;
+					for(j=mnl;j>=it->name.length();j--) cout<<" ";
+					cout<<"|";
+				}
+				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 				cout<<"|"<<setprecision(2)<<fixed<<it->S;
 				cout<<endl;
@@ -799,10 +934,17 @@ namespace record_output{
 		cout<<"请输入最高分数：";
 		cin>>h; 
 		clock_t start = clock();
-		cout<<"排名 |学号 ";
-		for(i=midl;i>4;i--) cout<<" ";
-		cout<<"|姓名 ";
-		for(i=mnl;i>4;i--) cout<<" ";
+		if(ROSnum) cout<<"排名 |";
+		if(ROSid){
+			cout<<"学号 ";
+			for(i=midl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
+		if(ROSname){
+			cout<<"姓名 ";
+			for(i=mnl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
 		cout<<"|考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
@@ -814,17 +956,24 @@ namespace record_output{
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
-			if(it->S>=l&&it->S<=h){
-				if(i<10) cout<<i<<"    |";
-				if(i>=10&&i<100) cout<<i<<"   |";
-				if(i>=100&&i<1000) cout<<i<<"  |";
-				if(i>=1000&&i<10000) cout<<i<<" |";
-				if(i>=10000&&i<100000) cout<<i<<"|";
-				cout<<it->id;
-				for(j=midl;j>=it->id.length();j--) cout<<" ";
-				cout<<"|"<<it->name;
-				for(j=mnl;j>=it->name.length();j--) cout<<" ";
-				cout<<"|"<<it->exam_name;
+			if(it->S>=l&&it->S<=h){	if(ROSnum){
+					if(i<10) cout<<i<<"    |";
+					if(i>=10&&i<100) cout<<i<<"   |";
+					if(i>=100&&i<1000) cout<<i<<"  |";
+					if(i>=1000&&i<10000) cout<<i<<" |";
+					if(i>=10000&&i<100000) cout<<i<<"|";
+				}
+				if(ROSid){
+					cout<<it->id;
+					for(j=midl;j>=it->id.length();j--) cout<<" ";
+					cout<<"|";
+				}
+				if(ROSname){
+					cout<<it->name;
+					for(j=mnl;j>=it->name.length();j--) cout<<" ";
+					cout<<"|";
+				}
+				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 				cout<<"|"<<setprecision(2)<<fixed<<it->S;
 				cout<<endl;
@@ -870,10 +1019,17 @@ namespace record_output{
 		bool f=false; 
 		z.exam_name=' ';
 		clock_t start = clock();
-		cout<<"排名 |学号 ";
-		for(i=midl;i>4;i--) cout<<" ";
-		cout<<"|姓名 ";
-		for(i=mnl;i>4;i--) cout<<" ";
+		if(ROSnum) cout<<"排名 |";
+		if(ROSid){
+			cout<<"学号 ";
+			for(i=midl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
+		if(ROSname){
+			cout<<"姓名 ";
+			for(i=mnl;i>4;i--) cout<<" ";
+			cout<<"|";
+		}
 		cout<<"|考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
@@ -886,17 +1042,25 @@ namespace record_output{
 				cout<<endl;
 			}
 			for(siit=stuinfo.begin();siit!=stuinfo.end();siit++){
-				if(siit->name==it->name&&siit->id==it->id){
-					if(i<10) cout<<i<<"    |";
-					if(i>=10&&i<100) cout<<i<<"   |";
-					if(i>=100&&i<1000) cout<<i<<"  |";
-					if(i>=1000&&i<10000) cout<<i<<" |";
-					if(i>=10000&&i<100000) cout<<i<<"|";
-					cout<<it->id;
-					for(j=midl;j>=it->id.length();j--) cout<<" ";
-					cout<<"|"<<it->name;
-					for(j=mnl;j>=it->name.length();j--) cout<<" ";
-					cout<<"|"<<it->exam_name;
+				if(siit->name==it->name&&siit->id==it->id){	
+					if(ROSnum){
+						if(i<10) cout<<i<<"    |";
+						if(i>=10&&i<100) cout<<i<<"   |";
+						if(i>=100&&i<1000) cout<<i<<"  |";
+						if(i>=1000&&i<10000) cout<<i<<" |";
+						if(i>=10000&&i<100000) cout<<i<<"|";
+					}
+					if(ROSid){
+						cout<<it->id;
+						for(j=midl;j>=it->id.length();j--) cout<<" ";
+						cout<<"|";
+					}
+					if(ROSname){
+						cout<<it->name;
+						for(j=mnl;j>=it->name.length();j--) cout<<" ";
+						cout<<"|";
+					}
+					cout<<it->exam_name;
 					for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 					cout<<"|"<<setprecision(2)<<fixed<<it->S;
 					cout<<endl;
@@ -916,8 +1080,14 @@ namespace record_output{
 	//record output end
 }
 
-int main(){
+int main(){	
+	//===============init===============
 	system("cls");
+	ifstream fin;
+	fin.open("ROS.dat");
+	fin>>ROSnum>>ROSid>>ROSname;
+	fin.close();
+	if(!ROSid&&!ROSname) ROSid=ROSname=1;
 	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
 	string clssnm,pwd;
 	int n;
@@ -963,6 +1133,7 @@ int main(){
 			ScoreControl=ScoreControlFI/80123750;
 		}
 	}
+	//===============init===============
 	while(o[0]!='E'){
 		cin.clear();
 		cin.sync(); 
@@ -1066,10 +1237,17 @@ int main(){
 				cout<<"数据量过大，不可继续录入信息！"<<endl;
 				system("pause");
 			}
-			if(o[0]=='2') record_input::rchange();
-			if(o[0]=='3') record_input::rdelete();
+			if(o[0]=='2'){
+				if(stu.size()<=0) MessageBox(NULL,"暂无数据，无法进行更改操作！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+				else record_input::rchange();
+			} 
+			if(o[0]=='3'){
+				if(stu.size()<=0) MessageBox(NULL,"暂无数据，无法进行删除操作！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+				else record_input::rdelete();
+			}
 			if(o[0]=='4'){
-				while(1){
+				if(stu.size()<=0) MessageBox(NULL,"暂无数据，无法进行删除操作！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
+				while(stu.size()>0){
 					bool admin;
 					system("cls");
 					start(4);
@@ -1141,6 +1319,7 @@ int main(){
 			cout<<"3.查看特定考试学生的排名"<<endl; 
 			cout<<"4.查看特定分数段内学生的排名"<<endl; 
 			cout<<"5.查看班级 "<<clssnm<<" 内学生的排名"<<endl; 
+			cout<<"6.查询设置"<<endl; 
 			cout<<"按其他键 返回"<<endl; 
 			cout<<"请输入命令代码：";
 			o[0]=getch(); 
@@ -1150,6 +1329,7 @@ int main(){
 			if(o[0]=='4') record_output::find_score();
 			if(o[0]=='5'&&fin) record_output::find_clssnm();
 			if(o[0]=='5'&&!fin) MessageBox(NULL,"您尚未创建班级！\r\n请前往 主页=>学生信息操作=>4.班级模式录入信息 创建班级！","学生成绩管理系统",MB_OK|MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND);
+			if(o[0]=='6') record_output::Settings();
 			o[0]=0;
 		}
 		if(o[0]=='4'&&usr){
@@ -1166,7 +1346,7 @@ int main(){
 			cout<<"4.设置分数限制"<<endl; 
 			cout<<"5.联系作者"<<endl; 
 			cout<<"6.查看数据量"<<endl; 
-			cout<<"7.升级"<<endl; 
+			cout<<"7.更新"<<endl; 
 			cout<<"按其他键 返回"<<endl; 
 			cout<<"请输入命令代码：";
 			o[0]=getch();
@@ -1282,7 +1462,7 @@ int main(){
 				system("cls");
 				system("del D:\\SAMS_zh-cn_installer.rar");
 				system("cls");
-				cout<<"正在使用 wget 下载 安装程序 所需的最新资源，请勿关闭程序......"<<endl;
+				cout<<"正在使用 wget 下载最新的 安装程序，请勿关闭程序......"<<endl;
 				system("wget https://xiyuwang2006.github.io/MyWork/StudentAchievementManagementSystem/SAMS_zh-cn_installer.rar");
 				system("copy SAMS_zh-cn_installer.rar D:\\SAMS_zh-cn_installer.rar");
 				system("del SAMS_zh-cn_installer.rar /s/f/q"); 
@@ -1290,7 +1470,7 @@ int main(){
 				ifstream fin;
 				fin.open("D:\\SAMS_zh-cn.rar") ;
 				if(!fin){
-					cout<<"无法下载 64位系统 的最新资源包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
+					cout<<"无法下载 64位系统 的最新安装包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
 					getch(); 
 				}
 				else{

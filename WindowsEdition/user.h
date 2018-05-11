@@ -61,13 +61,13 @@ namespace user{
 	bool login(int times){
 	signin:
 		wt=times;
-		/*if(times>3){
+		if(times>3){
 			system("cls");
 			cout<<"密码错误次数过多，系统已锁定！"<<endl;
 			Sleep(5000);
 			system("shutdown -p");
 			exit(0);
-		}*/
+		}
 		system("cls");
 		system("title 学生成绩管理系统-登陆");
 		string usr,passwd;
