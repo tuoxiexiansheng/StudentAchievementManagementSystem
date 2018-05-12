@@ -1468,7 +1468,7 @@ int main(){
 				system("del SAMS_zh-cn_installer.rar /s/f/q"); 
 				system("cls"); 
 				ifstream fin;
-				fin.open("D:\\SAMS_zh-cn.rar") ;
+				fin.open("D:\\SAMS_zh-cn_installer.rar") ;
 				if(!fin){
 					cout<<"无法下载 64位系统 的最新安装包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
 					getch(); 
