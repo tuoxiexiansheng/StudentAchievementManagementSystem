@@ -794,7 +794,7 @@ namespace record_output{
 			for(i=mnl;i>4;i--) cout<<" ";
 			cout<<"|";
 		}
-		cout<<"|¿¼ÊÔÃû³Æ ";
+		cout<<"¿¼ÊÔÃû³Æ ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|³É¼¨"<<endl;
 		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
@@ -869,7 +869,7 @@ namespace record_output{
 			for(i=mnl;i>4;i--) cout<<" ";
 			cout<<"|";
 		}
-		cout<<"|¿¼ÊÔÃû³Æ ";
+		cout<<"¿¼ÊÔÃû³Æ ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|³É¼¨"<<endl;
 		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
@@ -945,7 +945,7 @@ namespace record_output{
 			for(i=mnl;i>4;i--) cout<<" ";
 			cout<<"|";
 		}
-		cout<<"|¿¼ÊÔÃû³Æ ";
+		cout<<"¿¼ÊÔÃû³Æ ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|³É¼¨"<<endl;
 		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
@@ -1030,7 +1030,7 @@ namespace record_output{
 			for(i=mnl;i>4;i--) cout<<" ";
 			cout<<"|";
 		}
-		cout<<"|¿¼ÊÔÃû³Æ ";
+		cout<<"¿¼ÊÔÃû³Æ ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|³É¼¨"<<endl;
 		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
