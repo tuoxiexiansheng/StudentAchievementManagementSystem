@@ -3,12 +3,12 @@
 <h3>版本：16.9.18</h3>
 <h4>作者：<a href="https://github.com/XiyuWang2006/">XiyuWang2006</a></h4>
 <h4><a href="https://xiyuwang2006.github.io/MyWork/StudentAchievementManagementSystem/">跳转至网站</a>  <a href="https://github.com/XiyuWang2006/StudentAchievementManagementSystem/">跳转至GitHub</a></h4>
-<h3>README.md最近更新日期：2018.5.7</h3>
-<h3>源代码最近更新日期📅：2018.5.7</h3>
+<h3>README.md最近更新日期：2018.5.12</h3>
+<h3>源代码最近更新日期📅：2018.5.12</h3>
 <hr />
 <h3>Windows版本同时支持管理和查询。</h3> 
 <h3>Windows版本学生模式登陆用户名“Student”或“学生”👱，免密码。</h3>
-<h3>本次更新的内容：修复了在无数据情况下更改学生信息会闪退的bug；增添了查询设置，可以选择性输出排名、学号和姓名</h3>
+<h3>本次更新的内容：增添了密码错误的惩罚功能</h3>
 <h3>下一次更新内容：待定🏴</h3>
 <hr />
 
