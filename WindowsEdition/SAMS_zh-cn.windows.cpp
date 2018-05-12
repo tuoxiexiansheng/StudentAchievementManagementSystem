@@ -88,7 +88,7 @@ bool DriverCheck(){
 	fout<<"Result: Exist!"<<endl;
 	fout<<"This file will be deleted by SAMS program in 1 minute!"<<endl;
 	fout.close();
-	system("del DriverExist.txt /f/q");
+	system("del D:\\DriverExist.txt /f/q");
 	return 1;
 }
 
