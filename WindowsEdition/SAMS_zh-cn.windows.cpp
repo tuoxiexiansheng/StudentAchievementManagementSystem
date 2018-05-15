@@ -1468,15 +1468,16 @@ int main(){
 				system("del SAMS_zh-cn_installer.rar /s/f/q"); 
 				system("cls"); 
 				ifstream fin;
-				fin.open("D:\\SAMS_zh-cn_installer.rar") ;
+				fin.open("D:\\SAMS_zh-cn_installer.rar");
 				if(!fin){
-					cout<<"无法下载 64位系统 的最新安装包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
+					cout<<"无法下载最新安装包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
 					getch(); 
 				}
 				else{
 					cout<<"最新资源包已经存放在D盘，文件名“SAMS_zh-cn_installer.rar”！"<<endl;
 					cout<<"请先卸载旧软件，然后解压压缩包，运行安装程序，重装本系统！"<<endl;
-					cout<<"注意：正常重装系统不会导致学生信息的丢失（当然，如果您不放心，也可以先备份信息）！"<<endl; 
+					cout<<"注意：正常重装系统不会导致学生信息的丢失（当然，如果您不放心，也可以先备份信息）！"<<endl;
+					system("D:\\SAMS_zh-cn_installer.rar"); 
 					getch();
 				}
 			}
