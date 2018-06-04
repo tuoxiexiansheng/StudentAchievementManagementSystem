@@ -731,7 +731,9 @@ namespace record_output{
 		cout<<"考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
-		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
+		double STmp=-1;
+		for(it=stu.begin(),i=0;it!=stu.end();it++){
+			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
 				Average=All/(i-1);
 				All=0;
@@ -760,6 +762,7 @@ namespace record_output{
 			for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 			cout<<"|"<<setprecision(2)<<fixed<<it->S;
 			cout<<endl;
+			STmp=it->S; 
 			All+=it->S;
 			z.exam_name=it->exam_name;
 		}
@@ -797,7 +800,9 @@ namespace record_output{
 		cout<<"考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
-		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
+		double STmp;
+		for(it=stu.begin(),i=0;it!=stu.end();it++){
+			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
 				Average=All/(i-1);
 				All=0;
@@ -826,6 +831,7 @@ namespace record_output{
 				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 				cout<<"|"<<setprecision(2)<<fixed<<it->S;
+				STmp=it->S; 
 				cout<<endl;
 				f=true;
 			}
@@ -872,8 +878,10 @@ namespace record_output{
 		cout<<"考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
-		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
-			if(z.exam_name!=it->exam_name&&i!=1){
+		double STmp;
+		for(it=stu.begin(),i=0;it!=stu.end();it++){
+			if(STmp!=it->S) i++;
+			if(z.exam_name!=it->exam_name&&i!=1&&z.exam_name==tmp){
 				Average=All/(i-1);
 				All=0;
 				i=1;
@@ -900,6 +908,7 @@ namespace record_output{
 				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 				cout<<"|"<<setprecision(2)<<fixed<<it->S;
+				STmp=it->S; 
 				cout<<endl;
 				f=true;
 			}
@@ -948,7 +957,9 @@ namespace record_output{
 		cout<<"考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
-		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
+		double STmp;
+		for(it=stu.begin(),i=0;it!=stu.end();it++){
+			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
 				Average=All/(i-1);
 				All=0;
@@ -976,6 +987,7 @@ namespace record_output{
 				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 				cout<<"|"<<setprecision(2)<<fixed<<it->S;
+				STmp=it->S; 
 				cout<<endl;
 				f=true;
 			}
@@ -1033,7 +1045,9 @@ namespace record_output{
 		cout<<"考试名称 ";
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
-		for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
+		double STmp;
+		for(it=stu.begin(),i=0;it!=stu.end();it++){
+			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
 				Average=All/(i-1);
 				All=0;
@@ -1063,6 +1077,7 @@ namespace record_output{
 					cout<<it->exam_name;
 					for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
 					cout<<"|"<<setprecision(2)<<fixed<<it->S;
+					STmp=it->S; 
 					cout<<endl;
 					break;
 				}
@@ -1083,15 +1098,6 @@ namespace record_output{
 int main(){	
 	//===============init===============
 	system("cls");
-	ifstream fin;
-	fin.open("ROS.dat");
-	fin>>ROSnum>>ROSid>>ROSname;
-	fin.close();
-	if(!ROSid&&!ROSname) ROSid=ROSname=1;
-	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
-	string clssnm,pwd;
-	int n;
-	int size,sizetmp;
 	system("color f0");
 	ti=t->tm_min; 
 	bool usr,adminAccess,DriverExist;
@@ -1105,7 +1111,18 @@ int main(){
 		MessageBox(NULL,"系统未未找到D盘，由于系统会在 表格文件保存 ， 备份信息 和  下载安装包 时会用到D盘，请创建D盘（方法请自行查找）！\r\n注意：按确定键后系统会关闭！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		exit(0);
 	}
+	cin.clear();
+	cin.sync(); 
 	load(); hit(); start(4); usr=user::login(1); load(); file::input(1);
+	ifstream fin;
+	fin.open("ROS.dat");
+	fin>>ROSnum>>ROSid>>ROSname;
+	fin.close();
+	if(!ROSid&&!ROSname) ROSid=ROSname=1;
+	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
+	string clssnm,pwd;
+	int n;
+	int size,sizetmp;
 	if(usr){
 		ifstream fin;
 		fin.open("ScoreControl.dat");
@@ -1468,16 +1485,15 @@ int main(){
 				system("del SAMS_zh-cn_installer.rar /s/f/q"); 
 				system("cls"); 
 				ifstream fin;
-				fin.open("D:\\SAMS_zh-cn_installer.rar");
+				fin.open("D:\\SAMS_zh-cn_installer.rar") ;
 				if(!fin){
-					cout<<"无法下载最新安装包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
+					cout<<"无法下载 64位系统 的最新安装包！请检查网络和D盘是否存在！如果网络正常，则可能是服务器维护，10~30分钟内将修复！"<<endl;
 					getch(); 
 				}
 				else{
 					cout<<"最新资源包已经存放在D盘，文件名“SAMS_zh-cn_installer.rar”！"<<endl;
 					cout<<"请先卸载旧软件，然后解压压缩包，运行安装程序，重装本系统！"<<endl;
-					cout<<"注意：正常重装系统不会导致学生信息的丢失（当然，如果您不放心，也可以先备份信息）！"<<endl;
-					system("D:\\SAMS_zh-cn_installer.rar"); 
+					cout<<"注意：正常重装系统不会导致学生信息的丢失（当然，如果您不放心，也可以先备份信息）！"<<endl; 
 					getch();
 				}
 			}
