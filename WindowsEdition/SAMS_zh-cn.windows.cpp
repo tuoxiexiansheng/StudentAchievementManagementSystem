@@ -769,7 +769,7 @@ namespace record_output{
 			All+=it->S;
 			z.exam_name=it->exam_name;
 		}
-		Average=All/(i-1);
+		Average=All/(sum-1);
 		cout<<"平均分："<<Average<<endl<<endl;
 		clock_t end   = clock();
 		cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
@@ -843,7 +843,7 @@ namespace record_output{
 			All+=it->S; 
 			z.exam_name=it->exam_name;
 		}
-		Average=All/(i-1);
+		Average=All/(sum-1);
 		cout<<"平均分："<<Average<<endl<<endl;
 		if(f==true){
 			clock_t end   = clock();
@@ -922,7 +922,7 @@ namespace record_output{
 			All+=it->S; 
 			z.exam_name=it->exam_name;
 		}
-		Average=All/(i-1);
+		Average=All/(sum-1);
 		cout<<"平均分："<<Average<<endl<<endl;
 		if(f==true){
 			clock_t end   = clock();
@@ -1003,7 +1003,7 @@ namespace record_output{
 			All+=it->S; 
 			z.exam_name=it->exam_name;
 		}
-		Average=All/(i-1);
+		Average=All/(sum-1);
 		cout<<"平均分："<<Average<<endl<<endl;
 		if(f==true){
 			clock_t end   = clock();
@@ -1096,7 +1096,7 @@ namespace record_output{
 			All+=it->S; 
 			z.exam_name=it->exam_name;
 		}
-		Average=All/(i-1);
+		Average=All/(sum-1);
 		cout<<"平均分："<<Average<<endl<<endl;
 		clock_t end   = clock();
 		cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
