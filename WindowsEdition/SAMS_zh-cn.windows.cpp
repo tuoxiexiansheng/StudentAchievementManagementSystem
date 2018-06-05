@@ -453,7 +453,8 @@ namespace file{
 		system("copy Backup.dll D:\\StudentAchievementManagementSystem_BACKUP\\Backup.exe");
 		system("cls");
 		cout<<"备份成功，所有文件都储存于文件夹“D:\\StudentAchievementManagementSystem_BACKUP”中！"<<endl;
-		cout<<"如需导入其它计算机，则须将储存文件的文件夹（注意：直接复制文件夹）复制到另外一台计算机，然后运行文件夹中的Backup.exe，即会自动导入，导入完成后将会删除备份文件！"<<endl;
+		cout<<"如需导入其它计算机，则须将储存文件的文件夹（注意：直接复制文件夹）复制到另外一台计算机，然后 以管理员身份 运行文件夹中的Backup.exe，即会自动导入，导入完成后将会删除备份文件！"<<endl;
+		cout<<"                                                                                            ~~~~~~~~~~~~~~"<<endl;
 		getch(); 
 	}
 	//file operation end
@@ -732,12 +733,14 @@ namespace record_output{
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
 		double STmp=-1;
-		for(it=stu.begin(),i=0;it!=stu.end();it++){
+		int sum;
+		for(it=stu.begin(),i=0,sum=1;it!=stu.end();it++,sum++){
 			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
-				Average=All/(i-1);
+				Average=All/(sum-1);
 				All=0;
 				i=1;
+				sum=1;
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
@@ -801,12 +804,14 @@ namespace record_output{
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
 		double STmp;
-		for(it=stu.begin(),i=0;it!=stu.end();it++){
+		int sum;
+		for(it=stu.begin(),i=0,sum=1;it!=stu.end();it++,sum++){
 			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
-				Average=All/(i-1);
+				Average=All/(sum-1);
 				All=0;
 				i=1;
+				sum=1;
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
@@ -879,12 +884,14 @@ namespace record_output{
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
 		double STmp;
-		for(it=stu.begin(),i=0;it!=stu.end();it++){
+		int sum=1;
+		for(it=stu.begin(),i=0;it!=stu.end();it++,sum++){
 			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1&&z.exam_name==tmp){
-				Average=All/(i-1);
+				Average=All/(sum-1);
 				All=0;
 				i=1;
+				sum=1;
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
@@ -958,12 +965,14 @@ namespace record_output{
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
 		double STmp;
-		for(it=stu.begin(),i=0;it!=stu.end();it++){
+		int sum=1;
+		for(it=stu.begin(),i=0;it!=stu.end();it++,sum++){
 			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
-				Average=All/(i-1);
+				Average=All/(sum-1);
 				All=0;
 				i=1;
+				sum=1;
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
@@ -1046,12 +1055,14 @@ namespace record_output{
 		for(i=menl;i>8;i--) cout<<" ";
 		cout<<"|成绩"<<endl;
 		double STmp;
-		for(it=stu.begin(),i=0;it!=stu.end();it++){
+		int sum=1;
+		for(it=stu.begin(),i=0;it!=stu.end();it++,sum++){
 			if(STmp!=it->S) i++;
 			if(z.exam_name!=it->exam_name&&i!=1){
-				Average=All/(i-1);
+				Average=All/(sum-1);
 				All=0;
 				i=1;
+				sum=1;
 				cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}

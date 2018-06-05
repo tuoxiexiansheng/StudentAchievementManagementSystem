@@ -58,8 +58,7 @@ namespace user{
 		system("del SignIn.dll /s /f /q"); 
 	}
 	int wt;//wt:wrong_time
-	bool login(int times){
-	signin:
+	inline bool login(int times){
 		wt=times;
 		if(times>3){
 			system("cls");
@@ -78,6 +77,7 @@ namespace user{
 		system("del SignIn.dll /s /f /q"); 
 		system("cls");
 		cout<<"登陆（管理员输入用户名和密码；学生用户名“学生”或“Student”，免密码）"<<endl;  
+		cout<<"P.S.:如果程序闪退，可以尝试清理电脑垃圾（清除预读文件），如果仍然不行可尝试重装软件！"<<endl; 
 		cout<<"请输入用户名：";
 		string o;
 		cin>>o;
@@ -89,7 +89,7 @@ namespace user{
 			MessageBox(NULL,"系统错误！\r\n请以管理员身份重新运行程序！\r\n备注：按关闭按钮并在弹出窗口上选择 是 即可重启系统！","学生成绩管理系统",MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 			ofstream fout;
 			fout.open("ScoreControl.dat");
-			fout<<100*100*100<<endl;
+			fout<<8012375000<<endl;
 			fout.close();
 			exit(0);
 		}
@@ -118,17 +118,16 @@ namespace user{
 			if(o[i]!=passwd[i]||ii!=passwd.length()){
 				wt++;
 				MessageBox(NULL,"密码错误！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-				times=wt;
-				goto signin;
+				login(wt);
 			}
 		for(i=0;i<ii;i++){
 			if(o[i]!=passwd[i]||ii!=passwd.length()||ii<1||passwd.length()<1){
 				wt++;
 				MessageBox(NULL,"密码错误！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
-				times=wt;
-				goto signin;
+				login(wt);
 			}
 		}
+		cout<<endl<<"密码正确！"<<endl;
 		MessageBox(NULL,"密码正确！","学生成绩管理系统",MB_ICONINFORMATION|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		return 1;
 	}
