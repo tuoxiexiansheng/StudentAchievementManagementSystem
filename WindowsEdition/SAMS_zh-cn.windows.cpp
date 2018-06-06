@@ -887,12 +887,12 @@ namespace record_output{
 		int sum=1;
 		for(it=stu.begin(),i=0;it!=stu.end();it++,sum++){
 			if(STmp!=it->S) i++;
-			if(z.exam_name!=it->exam_name&&i!=1&&z.exam_name==tmp){
+			if(z.exam_name!=it->exam_name&&i!=1){
 				Average=All/(sum-1);
 				All=0;
 				i=1;
 				sum=1;
-				cout<<"平均分："<<Average<<endl;
+				if(z.exam_name==tmp) cout<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
 			if(it->exam_name==tmp){	if(ROSnum){
