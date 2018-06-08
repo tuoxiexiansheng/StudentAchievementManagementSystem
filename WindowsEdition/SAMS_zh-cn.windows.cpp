@@ -92,6 +92,18 @@ bool DriverCheck(){
 	return 1;
 }
 
+bool ACTIVATION(){
+	string code;
+	ifstream fin;
+	fin.open("Activation.dat");
+	getline(fin,code);
+	if(!fin||code!="SYSTEM ACTIVATED! ALLOWED TO RUN ON THIS COMPUTER! CODE:ck~.jj=T5Nif%h![utA#P[xvbQWH#-=c"){
+		MessageBox(NULL,"系统尚未激活，请按确定键前往激活！","学生成绩管理系统",MB_ICONWARNING|MB_SYSTEMMODAL|MB_SETFOREGROUND);
+		system("Activation.dll");
+		exit(0);
+	}
+}
+
 void start(int len){
 	srand(time(0));
 	string key,ans;
@@ -1124,6 +1136,7 @@ int main(){
 	}
 	cin.clear();
 	cin.sync(); 
+	ACTIVATION();
 	load(); hit(); start(4); usr=user::login(1); load(); file::input(1);
 	ifstream fin;
 	fin.open("ROS.dat");
@@ -1490,8 +1503,8 @@ int main(){
 				system("cls");
 				system("del D:\\SAMS_zh-cn_installer.rar");
 				system("cls");
-				cout<<"正在使用 wget 下载最新的 安装程序，请勿关闭程序......"<<endl;
-				system("wget https://xiyuwang2006.github.io/MyWork/StudentAchievementManagementSystem/SAMS_zh-cn_installer.rar");
+				cout<<"正在下载最新的 安装程序，请勿关闭程序......"<<endl;
+				system("wget https://xiyuwang2006.github.io/MyWork/StudentAchievementManagementSystem/SAMS_zh-cn_installer.rar -q");
 				system("copy SAMS_zh-cn_installer.rar D:\\SAMS_zh-cn_installer.rar");
 				system("del SAMS_zh-cn_installer.rar /s/f/q"); 
 				system("cls"); 
