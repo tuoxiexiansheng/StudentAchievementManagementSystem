@@ -1,5 +1,5 @@
 //Copyright (C) 2017-2018 XiyuWang All rights reserved.
-//Version: 16.9.18
+//Version: 17.2.6 
 
 //Author: XiyuWang
 //Author E-mail Address: XiyuWang_Code@hotmail.com 
@@ -125,7 +125,7 @@ void load(){
 	system("cls");
 	system("title 学生成绩管理系统-加载中......");
 	cout<<"Copyright (C) 2017-2018 XiyuWang All rights reserved."<<endl;
-	cout<<"Version:16.9.18"<<endl; 
+	cout<<"Version:17.2.6"<<endl; 
 	cout<<"注意：所有数据输入时不可添加空格，否则系统会出错！"<<endl; 
 	cout<<"小提示：您可以按 Ctrl+Z 停止输入数据！"<<endl; 
 	cout<<"加载中......"<<endl; 
@@ -291,7 +291,7 @@ namespace ClassEdition{
 					cout<<"学号："<<it->id<<endl;
 					cout<<"姓名："<<it->name<<endl;
 					cout<<"考试名称："<<it->exam_name<<endl; 
-					cout<<"本地成绩："<<fixed<<setprecision(2)<<it->S<<endl; 
+					cout<<"本地成绩："<<fixed<<setprecision(0)<<it->S<<endl; 
 					cout<<"输入成绩："<<tmp<<endl; 
 					cout<<"错误：该学生信息已存在！"<<endl;
 					cout<<"================================="<<endl;
@@ -327,21 +327,20 @@ namespace file{
 		if(!fout)
 			MessageBox(NULL,"错误：\r\n无法保存加密数据文件！请检查本系统是否已经获得管理员权限！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
 		else{	
-			fout<<"16.9.18"<<endl;
+			fout<<"17.2.6"<<endl;
 			fout<<stu.size()<<endl;
 			for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
 				z.exam_name=it->exam_name;
-				for(int i=0;i<=z.exam_name.size()-1;i++)
+				for(int i=0;i<=z.exam_name.size();i++)
 					z.exam_name[i]=z.exam_name[i]+1;
 				z.name=it->name;
-				for(int i=0;i<=z.name.size()-1;i++)
+				for(int i=0;i<=z.name.size();i++)
 					z.name[i]=z.name[i]+2;
 				z.id=it->id;
-				for(int i=0;i<=z.id.size()-1;i++)
+				for(int i=0;i<=z.id.size();i++)
 					z.id[i]=z.id[i]+3;
 				z.S=it->S;
-				z.S=z.S+12397;
-				fout<<z.exam_name<<" "<<z.id<<" "<<z.name<<" "<<z.S<<" ";
+				fout<<z.exam_name<<" "<<z.id<<" "<<z.name<<" "<<char(((int) z.S)+5)<<" ";
 			}
 			fout.close();
 		}
@@ -369,7 +368,7 @@ namespace file{
 					if((it->id).length()==2) fout<<it->id<<"  "<<","<<" ";
 					if((it->id).length()==3) fout<<it->id<<" "<<","<<" ";
 					if((it->id).length()==4) fout<<it->id<<""<<","<<" ";
-					fout<<setprecision(2)<<fixed<<it->S;
+					fout<<setprecision(0)<<fixed<<it->S;
 					fout<<" "<<","<<" "<<it->name<<" "<<","<<" "<<it->exam_name<<endl;
 					z.exam_name=it->exam_name;
 					All+=it->S; 
@@ -398,14 +397,15 @@ namespace file{
 		}
 		if(!fin&&w) return 1; 
 		fin>>version>>num;
-		if(version!="16.9.18"&&!w){
+		if(version!="17.2.6"&&!w){
 			cout<<"文件版本与系统不符，无法录入信息！"<<endl;
 			cout<<"文件版本："<<version<<endl; 
-			cout<<"系统版本：16.9.18"<<endl;
+			cout<<"系统版本：17.2.6"<<endl;
+			cout<<"部分版本的文件支持使用修复程序转码！"<<endl; 
 			system("pause");
 			return 1;
 		}
-		if(version!="16.9.18"&&w) return 1;
+		if(version!="17.2.6"&&w) return 1;
 		if((num+stu.size())>=10000&&!w){
 			cout<<"文件数据量过大，无法录入系统！"<<endl;
 			cout<<"文件数据量： "<<num<<endl;
@@ -417,7 +417,8 @@ namespace file{
 		}
 		if((num+stu.size())>=10000&&w) return 1;
 		for(int iiii=1;iiii<=num;iiii++){
-			fin>>z.exam_name>>z.id>>z.name>>z.S; 
+			char Stmp;
+			fin>>z.exam_name>>z.name>>z.id>>Stmp; 
 			for(i=0;i<=z.exam_name.size();i++)
 				z.exam_name[i]=z.exam_name[i]-1;
 			menl=max(menl,z.exam_name.length());
@@ -427,7 +428,7 @@ namespace file{
 			for(i=0;i<=z.id.size();i++)
 				z.id[i]=z.id[i]-3;
 			midl=max(midl,z.id.length());
-			z.S=z.S-12397;
+			z.S=((int) Stmp)-5;
 			for(it=stu.begin();it!=stu.end();it++){
 				if(it->exam_name==z.exam_name&&it->name==z.name&&it->id==z.id){
 					fileInputError:
@@ -438,8 +439,8 @@ namespace file{
 					cout<<"学号："<<it->id<<endl; 
 					cout<<"姓名："<<it->name<<endl;
 					cout<<"考试名称："<<it->exam_name<<endl;
-					cout<<"本地成绩："<<fixed<<setprecision(2)<<it->S<<endl;
-					cout<<"文件成绩："<<fixed<<setprecision(2)<<z.S<<endl; 
+					cout<<"本地成绩："<<fixed<<setprecision(0)<<it->S<<endl;
+					cout<<"文件成绩："<<fixed<<setprecision(0)<<z.S<<endl; 
 					cout<<"===================================="<<endl;
 					cout<<"1.本地                        2.文件"<<endl; 
 					cout<<"请选择要保留的信息（序号）："; 
@@ -509,8 +510,8 @@ namespace record_input{
 				cout<<"学号："<<it->id<<endl;
 				cout<<"姓名："<<it->name<<endl;
 				cout<<"考试名称："<<it->exam_name<<endl;
-				cout<<"本地成绩："<<fixed<<setprecision(2)<<it->S<<endl;
-				cout<<"输入成绩："<<fixed<<setprecision(2)<<z.S<<endl;
+				cout<<"本地成绩："<<fixed<<setprecision(0)<<it->S<<endl;
+				cout<<"输入成绩："<<fixed<<setprecision(0)<<z.S<<endl;
 				cout<<"===================="<<endl;
 				cout<<"是否替换？(Y/N)"; 
 				cin>>o;
@@ -604,7 +605,7 @@ namespace record_input{
 				cout<<"学号："<<it->id<<endl;
 				cout<<"姓名："<<it->name<<endl;
 				cout<<"考试名称："<<it->exam_name<<endl; 
-				cout<<"成绩："<<fixed<<setprecision(2)<<it->S<<endl;
+				cout<<"成绩："<<fixed<<setprecision(0)<<it->S<<endl;
 				if(MessageBox(NULL,"您确定要删除该学生的信息吗？","学生成绩管理系统",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES){
 					z.id=it->id;
 					stu.erase(it);
@@ -634,7 +635,7 @@ namespace record_input{
 		 bool found=false;
 		 for(it=stu.begin(),i=1;it!=stu.end();it++,i++){
 			if(it->exam_name==z.exam_name){
-				cout<<"已删除"<<i<<"条信息（学号："<<it->id<<" 姓名："<<it->name<<" 分数："<<fixed<<setprecision(2)<<it->S<<"）"<<endl;
+				cout<<"已删除"<<i<<"条信息（学号："<<it->id<<" 姓名："<<it->name<<" 分数："<<fixed<<setprecision(0)<<it->S<<"）"<<endl;
 				stu.erase(it);
 				it=stu.begin();
 				found=true;
@@ -775,7 +776,7 @@ namespace record_output{
 			}
 			cout<<it->exam_name;
 			for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
-			cout<<"|"<<setprecision(2)<<fixed<<it->S;
+			cout<<"|"<<setprecision(0)<<fixed<<it->S;
 			cout<<endl;
 			STmp=it->S; 
 			All+=it->S;
@@ -847,7 +848,7 @@ namespace record_output{
 				}
 				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
-				cout<<"|"<<setprecision(2)<<fixed<<it->S;
+				cout<<"|"<<setprecision(0)<<fixed<<it->S;
 				STmp=it->S; 
 				cout<<endl;
 				f=true;
@@ -926,7 +927,7 @@ namespace record_output{
 				}
 				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
-				cout<<"|"<<setprecision(2)<<fixed<<it->S;
+				cout<<"|"<<setprecision(0)<<fixed<<it->S;
 				STmp=it->S; 
 				cout<<endl;
 				f=true;
@@ -1007,7 +1008,7 @@ namespace record_output{
 				}
 				cout<<it->exam_name;
 				for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
-				cout<<"|"<<setprecision(2)<<fixed<<it->S;
+				cout<<"|"<<setprecision(0)<<fixed<<it->S;
 				STmp=it->S; 
 				cout<<endl;
 				f=true;
@@ -1099,7 +1100,7 @@ namespace record_output{
 					}
 					cout<<it->exam_name;
 					for(j=menl;j>=it->exam_name.length();j--) cout<<" ";
-					cout<<"|"<<setprecision(2)<<fixed<<it->S;
+					cout<<"|"<<setprecision(0)<<fixed<<it->S;
 					STmp=it->S; 
 					cout<<endl;
 					break;
@@ -1243,7 +1244,7 @@ int main(){
 			o[0]=0; 
 			system("cls");	
 			cout<<"Copyright (C) 2017-2018 XiyuWang All rights reserved."<<endl;
-			cout<<"Version:16.9.18"<<endl; 
+			cout<<"Version:17.2.6"<<endl; 
 			system("pause");
 			o[0]=0; 
 		}
@@ -1328,13 +1329,28 @@ int main(){
 			else cout<<t->tm_min<<endl;
 			cout<<"1.保存信息到文件（自动）"<<endl;
 			cout<<"2.从文件读取信息 "<<endl;
-			cout<<"3.导出所有数据文件"<<endl; 
+			cout<<"3.导出所有数据文件"<<endl;
+			cout<<"4.运行转码程序"<<endl; 
 			cout<<"按其他键 返回"<<endl;
 			cout<<"请输入命令代码：";
 			o[0]=getch(); 
 			if(o[0]=='1') file::output(0);
 			if(o[0]=='2') file::input(0);
 			if(o[0]=='3') file::backup(); 
+			if(o[0]=='4'){
+				o[0]=0;
+				system("cls");
+				cout<<"学生成绩管理系统-文件操作-运行转码程序";
+				cout<<" 日期："<<t->tm_year+1900<<"/"<<t->tm_mon+1<<"/"<<t->tm_mday;
+				cout<<" 时间："<<t->tm_hour<<":";
+				if(t->tm_min<10) cout<<"0"<<t->tm_min<<endl;
+				else cout<<t->tm_min<<endl;
+				cout<<"1.V16.9.18转至V17.2.6"<<endl;
+				cout<<"按其他键 返回"<<endl;
+				cout<<"请输入命令代码：";
+				o[0]=getch();
+				if(o[0]=='1') system("FileCodeConvert\\FileCodeConvert-16.9.18_To_17.2.6.dll");
+			}
 			o[0]=0;
 		}
 		if(o[0]=='3'&&usr||o[0]=='1'&&!usr){
