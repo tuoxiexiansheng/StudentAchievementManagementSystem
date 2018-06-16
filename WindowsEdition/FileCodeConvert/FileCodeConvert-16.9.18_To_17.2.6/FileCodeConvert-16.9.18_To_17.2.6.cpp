@@ -8,11 +8,43 @@
 using namespace std;
 int main(){
 	system("cls");
-	time_t tt = time(NULL);	
-	tm* t=localtime(&tt);
 	cout<<"StudentAchievementManagementSystem Patch Started!"<<endl;
 	cout<<"FILE PATCH V1"<<endl;
 	cout<<"CONVERT V16.9.18 FILE TO 17.2.6 FILE"<<endl;
+	
+	time_t tt = time(NULL);	
+	tm* t=localtime(&tt);
+	ifstream fin;
+	
+	cout<<endl<<"["<<(t->tm_year+1900)<<"/"<<(t->tm_mon+1)<<"/"<<(t->tm_mday)<<"-"<<(t->tm_hour)<<":";
+	if(t->tm_min<10) cout<<"0"<<t->tm_min;
+	else cout<<t->tm_min;
+	cout<<":";
+	if(t->tm_sec<10) cout<<"0"<<t->tm_sec;
+	else cout<<t->tm_sec;
+	fin.open("StudentScore.dat");
+	cout<<"] Checking file version..."<<endl;
+	string version;
+	fin>>version;
+	if(version=="16.9.18")
+		cout<<"Version correct!"<<endl;
+	else if(version=="17.2.6"){
+		cout<<"WARNING:"<<endl;
+		cout<<"File version:17.2.6"<<endl;
+		cout<<"Alreay the newest version!"<<endl;
+		cout<<"Cannot convert!"<<endl;
+		cout<<"Exiting..."<<endl;
+		Sleep(1000);
+		return 0;
+	}
+	else{
+		cout<<"Invalid version! Cannot convert!"<<endl;
+		cout<<"File version:"<<version<<endl;
+		cout<<"Exiting..."<<endl;
+		Sleep(1000);
+		return 0;
+	}
+	fin.close(); 
 	
 	cout<<endl<<"["<<(t->tm_year+1900)<<"/"<<(t->tm_mon+1)<<"/"<<(t->tm_mday)<<"-"<<(t->tm_hour)<<":";
 	if(t->tm_min<10) cout<<"0"<<t->tm_min;
@@ -39,31 +71,11 @@ int main(){
 	if(t->tm_sec<10) cout<<"0"<<t->tm_sec;
 	else cout<<t->tm_sec;
 	cout<<"] Checking file..."<<endl;
-	ifstream fin;
 	fin.open("StudentScore.dat.bak");
 	if(fin)
 		cout<<"Checked successfully!"<<endl;
 	if(!fin){
 		cout<<"Check failed!"<<endl;
-		cout<<"Exiting..."<<endl;
-		Sleep(1000);
-		return 0;
-	}
-	
-	cout<<endl<<"["<<(t->tm_year+1900)<<"/"<<(t->tm_mon+1)<<"/"<<(t->tm_mday)<<"-"<<(t->tm_hour)<<":";
-	if(t->tm_min<10) cout<<"0"<<t->tm_min;
-	else cout<<t->tm_min;
-	cout<<":";
-	if(t->tm_sec<10) cout<<"0"<<t->tm_sec;
-	else cout<<t->tm_sec;
-	cout<<"] Checking file version..."<<endl;
-	string version;
-	fin>>version;
-	if(version=="16.9.18")
-		cout<<"Version correct!"<<endl;
-	else{
-		cout<<"Invalid version! Cannot convert!"<<endl;
-		cout<<"File version:"<<version<<endl;
 		cout<<"Exiting..."<<endl;
 		Sleep(1000);
 		return 0;
