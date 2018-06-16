@@ -340,7 +340,7 @@ namespace file{
 				for(int i=0;i<=z.id.size();i++)
 					z.id[i]=z.id[i]+3;
 				z.S=it->S;
-				fout<<z.exam_name<<" "<<z.id<<" "<<z.name<<" "<<char(((int) z.S)+5)<<" ";
+				fout<<z.exam_name<<" "<<z.name<<" "<<z.id<<" "<<char(((int) z.S)+5)<<" ";
 			}
 			fout.close();
 		}
