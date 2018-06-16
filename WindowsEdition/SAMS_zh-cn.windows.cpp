@@ -368,8 +368,8 @@ namespace file{
 					if((it->id).length()==2) fout<<it->id<<"  "<<","<<" ";
 					if((it->id).length()==3) fout<<it->id<<" "<<","<<" ";
 					if((it->id).length()==4) fout<<it->id<<""<<","<<" ";
-					fout<<setprecision(0)<<fixed<<it->S;
 					fout<<" "<<","<<" "<<it->name<<" "<<","<<" "<<it->exam_name<<endl;
+					fout<<setprecision(0)<<fixed<<it->S;
 					z.exam_name=it->exam_name;
 					All+=it->S; 
 				}
@@ -754,7 +754,7 @@ namespace record_output{
 				All=0;
 				i=1;
 				sum=1;
-				cout<<"平均分："<<Average<<endl;
+				cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl;
 				cout<<endl;
 			}
 			if(ROSnum){
@@ -783,9 +783,9 @@ namespace record_output{
 			z.exam_name=it->exam_name;
 		}
 		Average=All/(sum-1);
-		cout<<"平均分："<<Average<<endl<<endl;
+		cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl<<endl;
 		clock_t end   = clock();
-		cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
+		cout << "使用时间：" <<setprecision(2)<<fixed<<(double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
 		system("pause");
 	}
 	//output only one student's information
@@ -825,7 +825,7 @@ namespace record_output{
 				All=0;
 				i=1;
 				sum=1;
-				cout<<"平均分："<<Average<<endl;
+				cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl;
 				cout<<endl;
 			}
 			if(it->id==tmp||it->name==tmp){
@@ -857,10 +857,10 @@ namespace record_output{
 			z.exam_name=it->exam_name;
 		}
 		Average=All/(sum-1);
-		cout<<"平均分："<<Average<<endl<<endl;
+		cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl<<endl;
 		if(f==true){
 			clock_t end   = clock();
-			cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
+			cout << "使用时间：" <<setprecision(2)<<fixed<< (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
 			system("pause");
 			return 1;
 		}
@@ -905,7 +905,7 @@ namespace record_output{
 				All=0;
 				i=1;
 				sum=1;
-				if(z.exam_name==tmp) cout<<"平均分："<<Average<<endl;
+				if(z.exam_name==tmp) cout<<setprecision(2)<<fixed<<"平均分："<<Average<<endl;
 				cout<<endl;
 			}
 			if(it->exam_name==tmp){	if(ROSnum){
@@ -936,10 +936,10 @@ namespace record_output{
 			z.exam_name=it->exam_name;
 		}
 		Average=All/(sum-1);
-		cout<<"平均分："<<Average<<endl<<endl;
+		cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl<<endl;
 		if(f==true){
 			clock_t end   = clock();
-			cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
+			cout << "使用时间：" << setprecision(2)<<fixed<<(double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
 			system("pause");
 			return 1;
 		}
@@ -986,7 +986,7 @@ namespace record_output{
 				All=0;
 				i=1;
 				sum=1;
-				cout<<"平均分："<<Average<<endl;
+				cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl;
 				cout<<endl;
 			}
 			if(it->S>=l&&it->S<=h){	if(ROSnum){
@@ -1017,10 +1017,10 @@ namespace record_output{
 			z.exam_name=it->exam_name;
 		}
 		Average=All/(sum-1);
-		cout<<"平均分："<<Average<<endl<<endl;
+		cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl<<endl;
 		if(f==true){
 			clock_t end   = clock();
-			cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
+			cout << "使用时间：" << setprecision(2)<<fixed<<(double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
 			system("pause");
 			return 1;
 		}
@@ -1076,7 +1076,7 @@ namespace record_output{
 				All=0;
 				i=1;
 				sum=1;
-				cout<<"平均分："<<Average<<endl;
+				cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl;
 				cout<<endl;
 			}
 			for(siit=stuinfo.begin();siit!=stuinfo.end();siit++){
@@ -1110,9 +1110,9 @@ namespace record_output{
 			z.exam_name=it->exam_name;
 		}
 		Average=All/(sum-1);
-		cout<<"平均分："<<Average<<endl<<endl;
+		cout<<"平均分："<<setprecision(2)<<fixed<<Average<<endl<<endl;
 		clock_t end   = clock();
-		cout << "使用时间：" << (double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
+		cout << "使用时间：" << setprecision(2)<<fixed<<(double)(end - start) / CLOCKS_PER_SEC << " 秒" << endl;
 		system("pause");
 		return 1;
 	}
@@ -1125,6 +1125,7 @@ int main(){
 	system("color f0");
 	ti=t->tm_min; 
 	bool usr,adminAccess,DriverExist;
+	bool SetFocus=0;
 	adminAccess=adminCheck(); 
 	if(!adminAccess){
 		MessageBox(NULL,"系统未获得管理员权限，为保障学生信息不会丢失，请使用管理员权限启动系统！\r\n注意：按确定键后系统会关闭！","学生成绩管理系统",MB_ICONERROR|MB_SYSTEMMODAL|MB_SETFOREGROUND); 
@@ -1211,10 +1212,12 @@ int main(){
 		if(usr) cout<<"H.帮助"<<endl; 
 		cout<<"E.退出系统"<<endl; 
 		cout<<"L.锁定系统"<<endl; 
+		if(!SetFocus) cout<<"S.置顶窗口"<<endl; 
 		if(usr) cout<<"R.重置数据"<<endl;
 		cout<<"@.关于"<<endl; 
 		cout<<"请输入命令代码："; 
 		o[0]=getch();
+		if(o[0]=='S'){SetWindowPos(GetConsoleWindow(), HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE|SWP_NOMOVE); SetFocus=1;}
 		if(o[0]=='E') if(MessageBox(NULL,"您确定要退出吗？","学生成绩管理系统",MB_YESNO|MB_ICONQUESTION|MB_SYSTEMMODAL|MB_SETFOREGROUND)==IDYES) break;
 		if(o[0]=='H') system("HELP_zh-cn.chm");
 		if(o[0]=='L'){load();start(4);usr=user::login(1);}

@@ -25,7 +25,8 @@ int main(){
 	fin.open("StudentScore.dat");
 	cout<<"] Checking file version..."<<endl;
 	string version;
-	fin>>version;
+	int num; 
+	fin>>version>>num;
 	if(version=="16.9.18")
 		cout<<"Version correct!"<<endl;
 	else if(version=="17.2.6"){
@@ -72,6 +73,7 @@ int main(){
 	else cout<<t->tm_sec;
 	cout<<"] Checking file..."<<endl;
 	fin.open("StudentScore.dat.bak");
+	fin>>version>>num;
 	if(fin)
 		cout<<"Checked successfully!"<<endl;
 	if(!fin){
@@ -88,8 +90,6 @@ int main(){
 	if(t->tm_sec<10) cout<<"0"<<t->tm_sec;
 	else cout<<t->tm_sec;
 	cout<<"] Getting ready to convert and output..."<<endl;
-	int num;
-	fin>>num;
 	ofstream fout;
 	fout.open("StudentScore.dat");
 	fout<<"17.2.6"<<endl;
